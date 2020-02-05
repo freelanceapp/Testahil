@@ -6,13 +6,17 @@ public class UserModel implements Serializable {
     private int id;
     private String name;
     private String email;
-    private String mobile_code;
-    private String mobile_number;
-    private String avatar;
+    private String phone;
+    private String address;
+    private String latitude;
+    private String longitude;
+    private String logo;
+    private String block;
+    private String is_login;
+    private String is_confirmed;
+    private String confirmation_code;
     private String city_id;
-    private int is_blocked;
-    private int confirmation_code;
-    private int is_confirmed;
+    private String token;
 
 
     public int getId() {
@@ -27,31 +31,47 @@ public class UserModel implements Serializable {
         return email;
     }
 
-    public String getMobile_code() {
-        return mobile_code;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getMobile_number() {
-        return mobile_number;
+    public String getAddress() {
+        return address;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public String getBlock() {
+        return block;
+    }
+
+    public String getIs_login() {
+        return is_login;
+    }
+
+    public String getIs_confirmed() {
+        return is_confirmed;
+    }
+
+    public String getConfirmation_code() {
+        return confirmation_code;
     }
 
     public String getCity_id() {
         return city_id;
     }
 
-    public int getIs_blocked() {
-        return is_blocked;
-    }
-
-    public int getConfirmation_code() {
-        return confirmation_code;
-    }
-
-    public int getIs_confirmed() {
-        return is_confirmed;
+    public String getToken() {
+        return token;
     }
 }

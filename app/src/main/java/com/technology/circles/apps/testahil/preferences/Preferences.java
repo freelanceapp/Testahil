@@ -58,13 +58,7 @@ public class Preferences {
 
 
 
-    public void clearChatUserData(Context context)
-    {
-        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.apply();
-    }
+
     public void createSession(Context context,String session)
     {
         SharedPreferences preferences = context.getSharedPreferences("sessionPref",Context.MODE_PRIVATE);

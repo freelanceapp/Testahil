@@ -1,16 +1,20 @@
 package com.technology.circles.apps.testahil.activities_fragments.activity_home;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,12 +45,20 @@ import com.technology.circles.apps.testahil.activities_fragments.activity_sign_i
 import com.technology.circles.apps.testahil.language.LanguageHelper;
 import com.technology.circles.apps.testahil.models.UserModel;
 import com.technology.circles.apps.testahil.preferences.Preferences;
+import com.technology.circles.apps.testahil.remote.Api;
+import com.technology.circles.apps.testahil.share.Common;
+import com.technology.circles.apps.testahil.tags.Tags;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
@@ -65,22 +77,24 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_NearBy fragment_nearBy;
     private Fragment_Setting fragment_setting;
 
-    private LinearLayout llMainContent,llContentSearch,llHomeContent,llMakeOffer,llFavorite;
-    private ImageView imageFilter,imageSearch;
+    private LinearLayout llMainContent, llContentSearch, llHomeContent, llMakeOffer, llFavorite;
+    private ImageView imageFilter, imageSearch;
     private CardView cardViewCity;
     private RoundedImageView arrow;
     private ExpandableLayout expandLayout;
     private RecyclerView recViewCity;
     private ProgressBar progBarCity;
     private TextView tvNoCityData;
+    private Button btnLogout;
 
     private int isFilter = 0;
 
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang","ar")));
+        super.attachBaseContext(LanguageHelper.updateResources(newBase, Paper.book().read("lang", "ar")));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +102,7 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
         initView();
-        if (savedInstanceState==null)
-        {
+        if (savedInstanceState == null) {
             DisplayFragmentOffer();
         }
 
@@ -100,12 +113,12 @@ public class HomeActivity extends AppCompatActivity {
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang","ar");
+        lang = Paper.book().read("lang", "ar");
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
         tab = findViewById(R.id.tab);
         llMainContent = findViewById(R.id.llMainContent);
@@ -113,6 +126,7 @@ public class HomeActivity extends AppCompatActivity {
         llHomeContent = findViewById(R.id.llHomeContent);
         imageFilter = findViewById(R.id.imageFilter);
         imageSearch = findViewById(R.id.imageSearch);
+        btnLogout = findViewById(R.id.btnLogout);
 
         cardViewCity = findViewById(R.id.cardViewCity);
         arrow = findViewById(R.id.arrow);
@@ -125,20 +139,17 @@ public class HomeActivity extends AppCompatActivity {
         llFavorite = findViewById(R.id.llFavorite);
 
 
-
         ah_bottom_nav = findViewById(R.id.ah_bottom_nav);
 
         tab.addTab(tab.newTab().setText("عربي"));
         tab.addTab(tab.newTab().setText("English"));
 
-        if (lang.equals("ar"))
-        {
+        if (lang.equals("ar")) {
             tab.getTabAt(0).select();
-        }else
-            {
-                tab.getTabAt(1).select();
+        } else {
+            tab.getTabAt(1).select();
 
-            }
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawer.setElevation(0.0f);
@@ -150,13 +161,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
-                if (isFilter ==1)
-                {
+                if (isFilter == 1) {
 
-                    float slideX = drawerView.getWidth()*slideOffset;
-                    if (lang.equals("ar"))
-                    {
-                        slideX = slideX*-1;
+                    float slideX = drawerView.getWidth() * slideOffset;
+                    if (lang.equals("ar")) {
+                        slideX = slideX * -1;
                     }
                     llHomeContent.setTranslationX(slideX);
                 }
@@ -196,14 +205,12 @@ public class HomeActivity extends AppCompatActivity {
                 drawer.closeDrawer(GravityCompat.START);
 
                 int pos = tab.getPosition();
-                if (pos==0)
-                {
+                if (pos == 0) {
                     RefreshActivity("ar");
-                }else
-                    {
-                        RefreshActivity("en");
+                } else {
+                    RefreshActivity("en");
 
-                    }
+                }
 
 
             }
@@ -221,17 +228,15 @@ public class HomeActivity extends AppCompatActivity {
 
         cardViewCity.setOnClickListener(view -> {
 
-            if (expandLayout.isExpanded())
-            {
+            if (expandLayout.isExpanded()) {
                 expandLayout.collapse(true);
                 arrow.animate().setDuration(500).rotationBy(-180).start();
 
-            }else
-                {
-                    expandLayout.expand(true);
-                    arrow.animate().setDuration(500).rotationBy(180).start();
+            } else {
+                expandLayout.expand(true);
+                arrow.animate().setDuration(500).rotationBy(180).start();
 
-                }
+            }
 
         });
 
@@ -246,13 +251,18 @@ public class HomeActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
             DisplayFragmentFavorite();
         });
+        btnLogout.setOnClickListener(view ->{
 
+            if (userModel!=null)
+            {
+                logout();
+            }
+
+        } );
         setUpBottomNavigation();
 
 
     }
-
-
 
 
     private void setUpBottomNavigation() {
@@ -272,7 +282,6 @@ public class HomeActivity extends AppCompatActivity {
         ah_bottom_nav.addItem(item2);
         ah_bottom_nav.addItem(item3);
         ah_bottom_nav.addItem(item4);
-
 
 
         ah_bottom_nav.setOnTabSelectedListener((position, wasSelected) -> {
@@ -297,7 +306,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         ah_bottom_nav.setCurrentItem(0, false);
-
 
 
     }
@@ -328,14 +336,13 @@ public class HomeActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_home_container, fragment_offers, "fragment_offers").addToBackStack("fragment_offers").commit();
 
         }
-       ah_bottom_nav.setCurrentItem(0, false);
+        ah_bottom_nav.setCurrentItem(0, false);
 
     }
 
     private void DisplayFragmentFavorite() {
 
-        if (fragment_favorite ==null)
-        {
+        if (fragment_favorite == null) {
             fragment_favorite = Fragment_Favorite.newInstance();
 
         }
@@ -425,7 +432,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, MakeOfferActivity.class);
                     startActivity(intent);
 
-                },500);
+                }, 500);
 
     }
 
@@ -446,26 +453,83 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    private void logout() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        try {
+
+            Api.getService(Tags.base_url)
+                    .logout("Bearer " + userModel.getToken(), userModel.getId())
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                userModel = null;
+                                preferences.clear(HomeActivity.this);
+                                navigateToLoginActivity();
+
+                            } else {
+
+                                try {
+
+                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                                if (response.code() == 500) {
+                                    Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(HomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            dialog.dismiss();
+
+        }
+    }
+
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START))
-        {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
 
 
+        } else {
+            if (fragment_offers != null && fragment_offers.isAdded() && fragment_offers.isVisible()) {
+                finish();
 
-        }else
-            {
-                if (fragment_offers != null && fragment_offers.isAdded() && fragment_offers.isVisible()) {
-                    finish();
-
-                } else {
-                    DisplayFragmentOffer();
-                }
-
-
-
+            } else {
+                DisplayFragmentOffer();
             }
+
+
+        }
     }
 
 
@@ -473,8 +537,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         List<Fragment> fragments = fragmentManager.getFragments();
-        for (Fragment fragment:fragments)
-        {
+        for (Fragment fragment : fragments) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }
 
@@ -485,8 +548,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         List<Fragment> fragments = fragmentManager.getFragments();
-        for (Fragment fragment:fragments)
-        {
+        for (Fragment fragment : fragments) {
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 

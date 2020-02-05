@@ -6,6 +6,10 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.technology.circles.apps.testahil.models.ProductModel" />
+
     </data>
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,6 +27,7 @@
             app:riv_border_color="@color/colorPrimary"
             app:riv_mutate_background="true"
             android:scaleType="fitXY"
+            image="@{model.main_image}"
             />
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -32,6 +37,7 @@
             app:riv_mutate_background="true"
             android:src="@drawable/product_row_bg"
             android:scaleType="fitXY"
+
 
             />
 

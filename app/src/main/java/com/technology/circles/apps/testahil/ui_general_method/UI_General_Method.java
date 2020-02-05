@@ -1,7 +1,6 @@
 package com.technology.circles.apps.testahil.ui_general_method;
 
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
-import com.creative.share.apps.testahil.R;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 import com.technology.circles.apps.testahil.tags.Tags;
 
@@ -37,36 +36,37 @@ public class UI_General_Method {
         }
     }
 
-    @BindingAdapter("avatarUser")
-    public static void avatarUser(View view,String endPoint)
+    @BindingAdapter("image")
+    public static void image(View view,String endPoint)
     {
         if (view instanceof CircleImageView)
         {
             CircleImageView imageView = (CircleImageView) view;
 
-            if (endPoint!=null)
-            {
-
-                Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_AVATAR+endPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
-            }else
-            {
-                Picasso.with(imageView.getContext()).load(R.drawable.ic_user).fit().into(imageView);
-
-            }
-        }else if (view instanceof ImageView)
-        {
-            ImageView imageView = (ImageView) view;
-
-            if (endPoint!=null)
+            if (endPoint!=null&&!endPoint.isEmpty()&&!endPoint.equals("0"))
             {
 
                 Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_AVATAR+endPoint)).fit().into(imageView);
-            }else
-                {
-                    Log.e("fff","fff");
-                    Picasso.with(imageView.getContext()).load(R.drawable.ic_user).fit().into(imageView);
+            }
+        }else if (view instanceof RoundedImageView)
+        {
+            ImageView imageView = (ImageView) view;
 
-                }
+            if (endPoint!=null&&!endPoint.isEmpty()&&!endPoint.equals("0"))
+            {
+
+                Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_AVATAR+endPoint)).fit().into(imageView);
+            }
+        }
+        else if (view instanceof ImageView)
+        {
+            ImageView imageView = (ImageView) view;
+
+            if (endPoint!=null&&!endPoint.isEmpty()&&!endPoint.equals("0"))
+            {
+
+                Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_AVATAR+endPoint)).fit().into(imageView);
+            }
         }
 
     }

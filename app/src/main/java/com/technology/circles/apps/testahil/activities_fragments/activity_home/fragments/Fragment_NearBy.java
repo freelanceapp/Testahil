@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.FragmentNearbyBinding;
@@ -41,9 +43,21 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
+import com.technology.circles.apps.testahil.adapter.CategoryMapAdapter;
+import com.technology.circles.apps.testahil.models.CategoryDataModel;
+import com.technology.circles.apps.testahil.models.UserModel;
 import com.technology.circles.apps.testahil.preferences.Preferences;
+import com.technology.circles.apps.testahil.remote.Api;
+import com.technology.circles.apps.testahil.tags.Tags;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private FragmentNearbyBinding binding;
@@ -57,7 +71,9 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
     private SupportMapFragment fragment;
     private final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
     private final int loc_req = 1225;
-
+    private UserModel userModel;
+    private CategoryMapAdapter categoryAdapter;
+    private List<CategoryDataModel.CategoryModel> categoryModelList;
 
 
     public static Fragment_NearBy newInstance() {
@@ -75,14 +91,92 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
 
     private void initView() {
         activity = (HomeActivity) getActivity();
+        categoryModelList = new ArrayList<>();
         preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang","ar");
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         initMap();
 
+        binding.recView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
+
+        categoryAdapter = new CategoryMapAdapter(categoryModelList,activity,this);
+        binding.recView.setAdapter(categoryAdapter);
+
+
     }
 
+    private void getCategories()
+    {
+        try {
+
+            Api.getService(Tags.base_url)
+                    .getCategories("Bearer "+userModel.getToken(),lang)
+                    .enqueue(new Callback<CategoryDataModel>() {
+                        @Override
+                        public void onResponse(Call<CategoryDataModel> call, Response<CategoryDataModel> response) {
+                            binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null&&response.body().getData()!=null) {
+
+                                categoryModelList.clear();
+
+                                if (response.body().getData().size()>0)
+                                {
+                                    categoryModelList.add(null);
+                                    categoryModelList.addAll(response.body().getData());
+
+                                    binding.tvNoData.setVisibility(View.GONE);
+                                    categoryAdapter.notifyDataSetChanged();
+                                }else
+                                {
+                                    binding.tvNoData.setVisibility(View.VISIBLE);
+                                }
+
+
+
+                            } else {
+
+                                try {
+
+                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                                if (response.code() == 500) {
+                                    Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<CategoryDataModel> call, Throwable t) {
+                            try {
+                                binding.progBar.setVisibility(View.GONE);
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+    }
     private void initMap() {
 
         fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
@@ -109,6 +203,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
 
             CheckPermission();
 
+            getCategories();
 
 
 

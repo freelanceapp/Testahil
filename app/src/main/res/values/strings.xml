@@ -140,5 +140,8 @@
     <string name="work_type">Work type</string>
     <string name="responsible_name">Responsible name(optional)</string>
     <string name="inv_phone">Invalid phone</string>
+    <string name="all">All</string>
+    <string name="inv_email_pass">Invalid email or password</string>
+    <string name="user_blocked">User blocked</string>
 
 </resources>
