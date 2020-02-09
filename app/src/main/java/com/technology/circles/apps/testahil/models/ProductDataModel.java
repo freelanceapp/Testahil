@@ -8,6 +8,9 @@ public class ProductDataModel implements Serializable {
     private int total;
     private List<ProductModel> data;
 
+    public List<ProductModel> getData() {
+        return data;
+    }
 
     public static class CompanyModel implements Serializable
     {

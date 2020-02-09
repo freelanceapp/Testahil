@@ -101,6 +101,7 @@
                         android:src="@drawable/ic_search"
                         android:padding="5dp"/>
                     <EditText
+                        android:id="@+id/edtSearch"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_gravity="center_vertical"
@@ -137,6 +138,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 />
             <TextView
                 android:id="@+id/tvNoSearchResult"
@@ -146,7 +148,7 @@
                 android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:text="@string/no_search_result"
-                android:visibility="gone"
+                android:visibility="visible"
 
                 />
         </FrameLayout>

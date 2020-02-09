@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -42,7 +45,9 @@ import com.technology.circles.apps.testahil.activities_fragments.activity_home.f
 import com.technology.circles.apps.testahil.activities_fragments.activity_make_offer.MakeOfferActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_search.SearchActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_sign_in.LoginActivity;
+import com.technology.circles.apps.testahil.adapter.CityAdapter;
 import com.technology.circles.apps.testahil.language.LanguageHelper;
+import com.technology.circles.apps.testahil.models.CityDataModel;
 import com.technology.circles.apps.testahil.models.UserModel;
 import com.technology.circles.apps.testahil.preferences.Preferences;
 import com.technology.circles.apps.testahil.remote.Api;
@@ -52,6 +57,7 @@ import com.technology.circles.apps.testahil.tags.Tags;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.paperdb.Paper;
@@ -84,10 +90,14 @@ public class HomeActivity extends AppCompatActivity {
     private ExpandableLayout expandLayout;
     private RecyclerView recViewCity;
     private ProgressBar progBarCity;
-    private TextView tvNoCityData;
+    private TextView tvNoCityData,tvDisableFilter;
     private Button btnLogout;
-
+    private RadioButton rbBranch,rbOnline;
+    private CityAdapter cityAdapter;
+    private List<CityDataModel.CityModel> cityModelList;
     private int isFilter = 0;
+    ////////////////////////////////////////////////////
+    private int city_id =0;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -109,6 +119,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        cityModelList = new ArrayList<>();
 
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
@@ -127,6 +138,11 @@ public class HomeActivity extends AppCompatActivity {
         imageFilter = findViewById(R.id.imageFilter);
         imageSearch = findViewById(R.id.imageSearch);
         btnLogout = findViewById(R.id.btnLogout);
+        tvDisableFilter = findViewById(R.id.tvDisableFilter);
+
+        rbBranch = findViewById(R.id.rbBranch);
+        rbOnline = findViewById(R.id.rbOnline);
+
 
         cardViewCity = findViewById(R.id.cardViewCity);
         arrow = findViewById(R.id.arrow);
@@ -134,9 +150,16 @@ public class HomeActivity extends AppCompatActivity {
         recViewCity = findViewById(R.id.recViewCity);
         progBarCity = findViewById(R.id.progBarCity);
         tvNoCityData = findViewById(R.id.tvNoCityData);
+        progBarCity.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         llMakeOffer = findViewById(R.id.llMakeOffer);
         llFavorite = findViewById(R.id.llFavorite);
+
+
+        recViewCity.setLayoutManager(new LinearLayoutManager(this));
+        cityAdapter = new CityAdapter(cityModelList,this);
+        recViewCity.setAdapter(cityAdapter);
+
 
 
         ah_bottom_nav = findViewById(R.id.ah_bottom_nav);
@@ -188,6 +211,14 @@ public class HomeActivity extends AppCompatActivity {
             public void onDrawerStateChanged(int newState) {
 
             }
+        });
+
+        rbBranch.setOnClickListener(view -> {
+
+        });
+
+        rbOnline.setOnClickListener(view -> {
+
         });
 
         imageFilter.setOnClickListener(view -> {
@@ -261,7 +292,83 @@ public class HomeActivity extends AppCompatActivity {
         } );
         setUpBottomNavigation();
 
+        tvDisableFilter.setOnClickListener(view -> {
+            rbOnline.setChecked(false);
+            rbBranch.setChecked(false);
+            if (cityAdapter!=null&&cityModelList.size()>0)
+            {
+                cityAdapter.clearSelection();
+            }
+        });
 
+        getCities();
+
+    }
+
+    private void getCities() {
+
+        Api.getService(Tags.base_url).
+                getCities("Bearer "+userModel.getToken(),lang).
+                enqueue(new Callback<CityDataModel>() {
+                    @Override
+                    public void onResponse(Call<CityDataModel> call, Response<CityDataModel> response) {
+                        progBarCity.setVisibility(View.GONE);
+                        if (response.isSuccessful() && response.body() != null&&response.body().getData()!=null) {
+
+                            cityModelList.clear();
+                            cityModelList.addAll(response.body().getData());
+
+                            if (cityModelList.size()>0)
+                            {
+                                cityAdapter.notifyDataSetChanged();
+                                tvNoCityData.setVisibility(View.GONE);
+                            }else
+                                {
+                                    tvNoCityData.setVisibility(View.VISIBLE);
+
+                                }
+
+                        } else {
+                            try {
+
+                                Log.e("error", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                            } else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CityDataModel> call, Throwable t) {
+
+                        try {
+                            progBarCity.setVisibility(View.GONE);
+                            if (t.getMessage() != null) {
+                                Log.e("error", t.getMessage());
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(HomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        } catch (Exception e) {
+                        }
+
+
+
+                    }
+                });
     }
 
 
@@ -556,4 +663,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    public void setItemCityData(CityDataModel.CityModel cityModel) {
+        if (city_id!=cityModel.getId_city())
+        {
+            city_id = cityModel.getId_city();
+        }
+    }
 }

@@ -35,32 +35,34 @@ public interface Service {
 
 
     @GET("api/all-categories")
-    Call<CategoryDataModel> getCategories(@Header("Authorization") String toke,
-                                          @Header("lang") String lang
+    Call<CategoryDataModel> getCategories(@Header("Authorization") String token,
+                                          @Header("lang") String lang,
+                                          @Query("page")int page
     );
 
     @FormUrlEncoded
     @POST("api/all-products")
-    Call<ProductDataModel> getProductByCategory(@Header("Authorization") String toke,
+    Call<ProductDataModel> getProductByCategory(@Header("Authorization") String token,
                                                 @Header("lang") String lang,
-                                                @Field("category_id") int category_id
+                                                @Field("category_id") String category_id,
+                                                @Field("page") int page
     );
 
 
     @GET("api/all-cities")
-    Call<CityDataModel> getCities(@Header("Authorization") String toke,
+    Call<CityDataModel> getCities(@Header("Authorization") String token,
                                   @Header("lang") String lang
     );
 
     @FormUrlEncoded
     @POST("api/my-products")
-    Call<ProductDataModel> getMyFavoriteProduct(@Header("Authorization") String toke,
+    Call<ProductDataModel> getMyFavoriteProduct(@Header("Authorization") String token,
                                                 @Header("lang") String lang,
                                                 @Field("action_type") String action_type
     );
 
     @GET("api/app/info")
-    Call<AppDataModel> getAppInfo(@Header("Authorization") String toke,
+    Call<AppDataModel> getAppInfo(@Header("Authorization") String token,
                                   @Header("lang") String lang
     );
 
@@ -75,10 +77,28 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/logout")
-    Call<ResponseBody> logout(@Header("Authorization") String toke,
+    Call<ResponseBody> logout(@Header("Authorization") String token,
                               @Field("user_id") int user_id
     );
 
+
+    @FormUrlEncoded
+    @POST("api/contactUs")
+    Call<ResponseBody> contactUs(@Header("lang") String lang,
+                                 @Header("Authorization") String token,
+                                 @Field("name") String name,
+                                 @Field("email") String email,
+                                 @Field("phone") String phone,
+                                 @Field("message") String message
+    );
+
+    @FormUrlEncoded
+    @POST("api/productsByName")
+    Call<ProductDataModel> searchByName(@Header("lang") String lang,
+                                    @Header("Authorization") String token,
+                                    @Field("product_name") String product_name
+
+    );
 
 }
 

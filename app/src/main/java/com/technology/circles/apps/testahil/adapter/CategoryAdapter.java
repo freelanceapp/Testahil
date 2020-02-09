@@ -16,6 +16,7 @@ import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.CategoryAllRowBinding;
 import com.creative.share.apps.testahil.databinding.CategoryRowBinding;
 import com.creative.share.apps.testahil.databinding.LoadMoreBinding;
+import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Offers;
 import com.technology.circles.apps.testahil.models.CategoryDataModel;
 
 import java.util.List;
@@ -69,6 +70,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 MyHolder myHolder = (MyHolder) holder;
                 myHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary));
                 myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+
+
+
             }else if (holder instanceof MyAllHolder)
             {
                 Log.e("1",position+"__");
@@ -107,6 +111,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             myHolder.itemView.setOnClickListener(view -> {
 
                 selectedPos = myHolder.getAdapterPosition();
+                CategoryDataModel.CategoryModel model2 = list.get(selectedPos);
+
+                if (fragment instanceof Fragment_Offers)
+                {
+
+                    Fragment_Offers fragment_offers = (Fragment_Offers) fragment;
+                    fragment_offers.setItemCategorySelected(String.valueOf(model2.getId()));
+                }
                 notifyDataSetChanged();
             });
 
@@ -118,6 +130,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             myAllHolder.itemView.setOnClickListener(view -> {
 
                 selectedPos = myAllHolder.getAdapterPosition();
+                if (fragment instanceof Fragment_Offers)
+                {
+
+                    Fragment_Offers fragment_offers = (Fragment_Offers) fragment;
+                    fragment_offers.setItemCategorySelected("All");
+                }
                 notifyDataSetChanged();
             });
 

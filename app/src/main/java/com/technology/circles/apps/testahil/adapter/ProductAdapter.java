@@ -60,7 +60,10 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof MyHolder)
         {
             MyHolder myHolder = (MyHolder) holder;
+            ProductModel model = list.get(myHolder.getAdapterPosition());
             myHolder.binding.setLang(lang);
+            myHolder.binding.setModel(model);
+
         }else if (holder instanceof LoadMoreHolder)
         {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;

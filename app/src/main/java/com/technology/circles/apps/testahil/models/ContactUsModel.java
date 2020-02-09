@@ -17,29 +17,29 @@ public class ContactUsModel extends BaseObservable implements Serializable {
 
     private String name;
     private String email;
-    private String subject;
+    private String phone;
     private String message;
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
-    public ObservableField<String> error_subject = new ObservableField<>();
+    public ObservableField<String> error_phone = new ObservableField<>();
     public ObservableField<String> error_message = new ObservableField<>();
 
 
     public ContactUsModel() {
         this.name = "";
         this.email = "";
-        this.subject = "";
+        this.phone = "";
         this.message = "";
     }
 
-    public ContactUsModel(String name, String email, String subject, String message) {
+    public ContactUsModel(String name, String email, String phone, String message) {
         this.name = name;
         notifyPropertyChanged(BR.name);
         this.email = email;
         notifyPropertyChanged(BR.email);
 
-        this.subject = subject;
-        notifyPropertyChanged(BR.subject);
+        this.phone = phone;
+        notifyPropertyChanged(BR.phone);
 
         this.message = message;
         notifyPropertyChanged(BR.message);
@@ -68,12 +68,12 @@ public class ContactUsModel extends BaseObservable implements Serializable {
     }
 
     @Bindable
-    public String getSubject() {
-        return subject;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Bindable
@@ -89,13 +89,14 @@ public class ContactUsModel extends BaseObservable implements Serializable {
         if (!TextUtils.isEmpty(name) &&
                 !TextUtils.isEmpty(email) &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-                !TextUtils.isEmpty(subject) &&
+                !TextUtils.isEmpty(phone) &&
+                phone.length()==9&&
                 !TextUtils.isEmpty(message)
 
         ) {
             error_name.set(null);
             error_email.set(null);
-            error_subject.set(null);
+            error_phone.set(null);
             error_message.set(null);
 
             return true;
@@ -115,10 +116,12 @@ public class ContactUsModel extends BaseObservable implements Serializable {
                 error_email.set(null);
             }
 
-            if (subject.isEmpty()) {
-                error_subject.set(context.getString(R.string.field_req));
+            if (phone.isEmpty()) {
+                error_phone.set(context.getString(R.string.field_req));
+            }else if (phone.length()!=9) {
+                error_phone.set(context.getString(R.string.inv_phone));
             } else {
-                error_subject.set(null);
+                error_phone.set(null);
             }
 
 

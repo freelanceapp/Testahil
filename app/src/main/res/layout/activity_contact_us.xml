@@ -142,23 +142,52 @@
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:text="@string/subject"
+                    android:text="@string/phone"
 
                     />
-                <EditText
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:orientation="horizontal"
                     android:background="@drawable/small_rounded_white"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:text="@={contactUs.subject}"
-                    error="@{contactUs.error_subject}"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:text="+966"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
 
-                    />
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:inputType="number"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:background="@color/white"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:maxLength="9"
+                        android:text="@={contactUs.phone}"
+                        error="@{contactUs.error_phone}"
+
+                        />
+
+                </LinearLayout>
+
+
+
 
                 <TextView
                     android:layout_width="wrap_content"

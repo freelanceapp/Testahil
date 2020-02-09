@@ -16,6 +16,7 @@ import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.CategoryAllRow2Binding;
 import com.creative.share.apps.testahil.databinding.CategoryRow2Binding;
 import com.creative.share.apps.testahil.databinding.LoadMoreBinding;
+import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_NearBy;
 import com.technology.circles.apps.testahil.models.CategoryDataModel;
 
 import java.util.List;
@@ -107,6 +108,15 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             myHolder.itemView.setOnClickListener(view -> {
 
                 selectedPos = myHolder.getAdapterPosition();
+                CategoryDataModel.CategoryModel model2 = list.get(selectedPos);
+
+                if (fragment instanceof Fragment_NearBy)
+                {
+
+                    Fragment_NearBy fragment_nearBy = (Fragment_NearBy) fragment;
+                    fragment_nearBy.setItemCategorySelected(String.valueOf(model2.getId()));
+                }
+
                 notifyDataSetChanged();
             });
 
@@ -118,6 +128,12 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             myAllHolder.itemView.setOnClickListener(view -> {
 
                 selectedPos = myAllHolder.getAdapterPosition();
+                if (fragment instanceof Fragment_NearBy)
+                {
+
+                    Fragment_NearBy fragment_nearBy = (Fragment_NearBy) fragment;
+                    fragment_nearBy.setItemCategorySelected("All");
+                }
                 notifyDataSetChanged();
             });
 
