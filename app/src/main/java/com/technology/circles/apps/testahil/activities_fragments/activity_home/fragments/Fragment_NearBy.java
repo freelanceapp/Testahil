@@ -66,7 +66,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class Fragment_NearBy extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private FragmentNearbyBinding binding;
     private HomeActivity activity;
     private Preferences preferences;
@@ -82,17 +82,16 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
     private CategoryMapAdapter categoryAdapter;
     private List<CategoryDataModel.CategoryModel> categoryModelList;
     private List<ProductModel> productModelList;
-    private String category_id ="";
+    private String category_id = "";
     private Call<ProductDataModel> callProduct, callLoadMore;
     private boolean isCategoryLoading = false;
-    private int category_current_page = 0;
+    private int category_current_page = 1;
     private boolean isProductLoading = false;
-    private int product_current_page = 0;
-    private int totalPage = 0;
+    private int product_current_page = 1;
+    private int totalPage = 1;
     private List<AdLocation> adLocationList;
     private ClusterManager clusterManager;
     private ClusterRender clusterRender;
-
 
 
     public static Fragment_NearBy newInstance() {
@@ -103,7 +102,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_nearby,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_nearby, container, false);
         initView();
         return binding.getRoot();
     }
@@ -116,13 +115,13 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(activity);
         Paper.init(activity);
-        lang = Paper.book().read("lang","ar");
+        lang = Paper.book().read("lang", "ar");
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         initMap();
 
-        binding.recView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
+        binding.recView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
 
-        categoryAdapter = new CategoryMapAdapter(categoryModelList,activity,this);
+        categoryAdapter = new CategoryMapAdapter(categoryModelList, activity, this);
         binding.recView.setAdapter(categoryAdapter);
 
 
@@ -144,7 +143,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
 
         binding.tvMore.setOnClickListener(view -> {
 
-            if (product_current_page<=totalPage&&!isProductLoading) {
+            if (product_current_page <= totalPage && !isProductLoading) {
                 isProductLoading = true;
                 int page = product_current_page + 1;
                 productModelList.add(null);
@@ -154,33 +153,29 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
 
     }
 
-    private void getCategories()
-    {
+    private void getCategories() {
         try {
 
             Api.getService(Tags.base_url)
-                    .getCategories("Bearer "+userModel.getToken(),lang,1)
+                    .getCategories("Bearer " + userModel.getToken(), lang, 1)
                     .enqueue(new Callback<CategoryDataModel>() {
                         @Override
                         public void onResponse(Call<CategoryDataModel> call, Response<CategoryDataModel> response) {
                             binding.progBar.setVisibility(View.GONE);
-                            if (response.isSuccessful() && response.body() != null&&response.body().getData()!=null) {
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
                                 categoryModelList.clear();
 
-                                if (response.body().getData().size()>0)
-                                {
+                                if (response.body().getData().size() > 0) {
                                     categoryModelList.add(null);
                                     categoryModelList.addAll(response.body().getData());
 
                                     binding.tvNoData.setVisibility(View.GONE);
                                     categoryAdapter.notifyDataSetChanged();
                                     getProduct("All");
-                                }else
-                                {
+                                } else {
                                     binding.tvNoData.setVisibility(View.VISIBLE);
                                 }
-
 
 
                             } else {
@@ -226,29 +221,26 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
         }
     }
 
-    private void getProduct(String category_id)
-    {
+    private void getProduct(String category_id) {
         this.category_id = category_id;
         productModelList.clear();
         binding.progBar2.setVisibility(View.VISIBLE);
         binding.tvMore.setVisibility(View.GONE);
         try {
 
-            if (callProduct!=null&&callProduct.isExecuted())
-            {
+            if (callProduct != null && callProduct.isExecuted()) {
                 callProduct.cancel();
             }
-            callProduct =  Api.getService(Tags.base_url).getProductByCategory("Bearer "+userModel.getToken(),lang,category_id,1);
+            callProduct = Api.getService(Tags.base_url).getProductByCategory("Bearer " + userModel.getToken(), lang, category_id, 1);
             callProduct.enqueue(new Callback<ProductDataModel>() {
                 @Override
                 public void onResponse(Call<ProductDataModel> call, Response<ProductDataModel> response) {
                     binding.progBar2.setVisibility(View.GONE);
 
-                    if (response.isSuccessful() && response.body() != null&&response.body().getData()!=null) {
+                    if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
                         totalPage = response.body().getTotal();
-                        if (response.body().getData().size()>0)
-                        {
+                        if (response.body().getData().size() > 0) {
                             productModelList.clear();
                             productModelList.addAll(response.body().getData());
                             binding.tvResult.setText(String.valueOf(productModelList.size()));
@@ -256,23 +248,19 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
                             updateMapUI();
 
 
-                            if (response.body().getCurrent_page()<response.body().getTotal())
-                            {
+                            if (response.body().getCurrent_page() < response.body().getTotal()) {
                                 binding.tvMore.setVisibility(View.VISIBLE);
-                            }else
-                                {
-                                    binding.tvMore.setVisibility(View.GONE);
+                            } else {
+                                binding.tvMore.setVisibility(View.GONE);
 
-                                }
-                        }else
-                        {
+                            }
+                        } else {
                             adLocationList.clear();
                             clusterManager.clearItems();
                             clusterManager.cluster();
                             binding.tvResult.setText("0");
 
                         }
-
 
 
                     } else {
@@ -328,16 +316,16 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
                         @Override
                         public void onResponse(Call<CategoryDataModel> call, Response<CategoryDataModel> response) {
                             isCategoryLoading = false;
+                            categoryModelList.remove(categoryModelList.size() - 1);
+                            categoryAdapter.notifyItemRemoved(categoryModelList.size() - 1);
 
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
-                                categoryModelList.remove(categoryModelList.size() - 1);
-                                categoryAdapter.notifyItemRemoved(categoryModelList.size() - 1);
-                                int oldPos = categoryModelList.size() - 1;
+                                  int oldPos = categoryModelList.size() - 1;
 
                                 if (response.body().getData().size() > 0) {
                                     categoryModelList.addAll(response.body().getData());
-                                    categoryAdapter.notifyItemRangeInserted(oldPos, categoryModelList.size());
+                                    categoryAdapter.notifyItemRangeChanged(oldPos, categoryModelList.size());
                                     category_current_page = response.body().getCurrent_page();
 
                                 }
@@ -374,7 +362,6 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
                                     categoryAdapter.notifyItemRemoved(categoryModelList.size() - 1);
 
                                 }
-                                binding.progBar.setVisibility(View.GONE);
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
@@ -412,8 +399,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
                         if (response.body().getData().size() > 0) {
                             productModelList.addAll(response.body().getData());
                             product_current_page = response.body().getCurrent_page();
-                            if (product_current_page==response.body().getTotal())
-                            {
+                            if (product_current_page == response.body().getTotal()) {
                                 binding.tvMore.setVisibility(View.GONE);
                             }
                         }
@@ -446,7 +432,6 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
 
                         isProductLoading = false;
 
-                        binding.progBar.setVisibility(View.GONE);
                         if (t.getMessage() != null) {
                             Log.e("error", t.getMessage());
                             if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
@@ -470,15 +455,13 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
         clusterManager.clearItems();
         clusterManager.cluster();
 
-        for (ProductModel model : productModelList)
-        {
-            if (!model.getCompany().getLatitude().isEmpty()&&model.getCompany().getLatitude()!=null&&!model.getCompany().getLongitude().isEmpty()&&model.getCompany().getLongitude()!=null)
-            {
+        for (ProductModel model : productModelList) {
+            if (!model.getCompany().getLatitude().isEmpty() && model.getCompany().getLatitude() != null && !model.getCompany().getLongitude().isEmpty() && model.getCompany().getLongitude() != null) {
                 Double lat = Double.parseDouble(model.getCompany().getLatitude());
                 Double lng = Double.parseDouble(model.getCompany().getLongitude());
 
-                LatLng latLng = new LatLng(lat,lng);
-                adLocationList.add(new AdLocation(model.getOffer_title(),model.getPrice()+" "+getString(R.string.sar),latLng,model));
+                LatLng latLng = new LatLng(lat, lng);
+                adLocationList.add(new AdLocation(model.getOffer_title(), model.getPrice() + " " + getString(R.string.sar), latLng, model));
             }
 
         }
@@ -512,19 +495,18 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
             mMap.getUiSettings().setCompassEnabled(false);
             mMap.getUiSettings().setTiltGesturesEnabled(false);
 
-            clusterManager = new ClusterManager(activity,mMap);
+            clusterManager = new ClusterManager(activity, mMap);
             mMap.setOnCameraIdleListener(clusterManager);
             mMap.setOnMarkerClickListener(clusterManager);
             mMap.setOnInfoWindowClickListener(clusterManager);
 
 
-            clusterRender = new ClusterRender(activity,mMap,clusterManager);
+            clusterRender = new ClusterRender(activity, mMap, clusterManager);
 
 
             CheckPermission();
 
             getCategories();
-
 
 
         }
@@ -554,6 +536,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
     public void onConnected(@Nullable Bundle bundle) {
         initLocationRequest();
     }
+
     private void initLocationRequest() {
         locationRequest = LocationRequest.create();
         locationRequest.setFastestInterval(1000);
@@ -647,10 +630,8 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback , Go
 
     public void setItemCategorySelected(String category_id) {
 
-        if (!this.category_id.equals(category_id))
-        {
-            if (callLoadMore !=null&& callLoadMore.isExecuted())
-            {
+        if (!this.category_id.equals(category_id)) {
+            if (callLoadMore != null && callLoadMore.isExecuted()) {
                 callLoadMore.cancel();
             }
             getProduct(category_id);

@@ -133,6 +133,10 @@ public class ProductModel implements Serializable {
         return is_favourite;
     }
 
+    public void setIs_favourite(int is_favourite) {
+        this.is_favourite = is_favourite;
+    }
+
     public String getCompany_title() {
         return company_title;
     }

@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.CategoryAllRowBinding;
+import com.creative.share.apps.testahil.databinding.CategoryLoadMoreBinding;
 import com.creative.share.apps.testahil.databinding.CategoryRowBinding;
-import com.creative.share.apps.testahil.databinding.LoadMoreBinding;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Offers;
 import com.technology.circles.apps.testahil.models.CategoryDataModel;
 
@@ -55,7 +55,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new MyHolder(binding);
         }else
             {
-                LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
+                Log.e("load2","load2");
+                CategoryLoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.category_load_more,parent,false);
                 return new LoadMoreHolder(binding);
             }
     }
@@ -90,7 +91,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
                 }else if (holder instanceof MyAllHolder)
                 {
-                    Log.e("2","2");
 
                     MyAllHolder myAllHolder = (MyAllHolder) holder;
 
@@ -111,7 +111,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             myHolder.itemView.setOnClickListener(view -> {
 
                 selectedPos = myHolder.getAdapterPosition();
-                CategoryDataModel.CategoryModel model2 = list.get(selectedPos);
+
+                CategoryDataModel.CategoryModel model2 = list.get(myHolder.getAdapterPosition());
 
                 if (fragment instanceof Fragment_Offers)
                 {
@@ -170,8 +171,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public class LoadMoreHolder extends RecyclerView.ViewHolder {
-        private LoadMoreBinding binding;
-        public LoadMoreHolder(@NonNull LoadMoreBinding binding) {
+        private CategoryLoadMoreBinding binding;
+        public LoadMoreHolder(@NonNull CategoryLoadMoreBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

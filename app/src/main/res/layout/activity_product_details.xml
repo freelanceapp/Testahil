@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.technology.circles.apps.testahil.models.ProductModel" />
+        <variable
+            name="backListener"
+            type="com.technology.circles.apps.testahil.interfaces.Listeners.BackListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.technology.circles.apps.testahil.activities_fragments.activity_product_details.ProductDetailsActivity"
+        android:background="@color/transparent"
+
+        >
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_rounded_bg"
+
+            >
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false"
+                >
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20dp">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/image"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:riv_border_width="0dp"
+                            app:riv_corner_radius_top_right="5dp"
+                            app:riv_corner_radius_top_left="5dp"
+                            app:riv_mutate_background="true"
+                            image="@{model.offer_image}"
+                            />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imageLogo"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:civ_border_width="1dp"
+                            app:civ_circle_background_color="@color/white"
+                            app:layout_constraintBottom_toBottomOf="@id/image"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/image"
+                            image="@{model.company.logo}"
+
+                            />
+
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/ic_group"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/image" />
+
+                        <TextView
+                            android:id="@+id/tvOfferType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text='@{model.offer_type.equals("family")?@string/family_offer:@string/individual_offer}'
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="@id/icon"
+                            app:layout_constraintEnd_toStartOf="@id/icon"
+                            app:layout_constraintTop_toTopOf="@id/icon"
+
+                            />
+
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/circle_white"
+                            app:layout_constraintBottom_toBottomOf="@id/icon"
+                            app:layout_constraintEnd_toStartOf="@id/tvOfferType"
+                            app:layout_constraintTop_toTopOf="@id/icon"
+
+                            >
+
+                            <CheckBox
+                                android:id="@+id/checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:button="@drawable/like_cb_bg"
+                                android:checked="@{model.is_favourite==0?false:true}"
+                                />
+                        </FrameLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_cancel"
+                        android:tint="@color/gray5"
+                        android:padding="5dp"
+                        android:onClick="@{()->backListener.back()}"
+                        />
+                </FrameLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_rounded_bg"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_nav_home"
+                            android:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:text='@{model.company.company_type.equals("local")?@string/merchant_branch:@string/merchant_online}'
+                            />
+
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray2" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:tabGravity="fill"
+                        app:tabIndicatorColor="@color/colorPrimary"
+                        app:tabIndicatorHeight="1dp"
+                        app:tabMode="fixed"
+                        app:tabSelectedTextColor="@color/colorPrimary"
+                        app:tabTextColor="@color/black"
+
+                        />
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="700dp"
+                        android:background="@drawable/bottom_rounded_bg"
+
+                        />
+
+
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/flContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/small_rounded_white"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:text="@string/have_a_problem"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp"
+                            android:text="@string/contact_us"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>

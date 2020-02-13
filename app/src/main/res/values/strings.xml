@@ -80,7 +80,7 @@
     <string name="blokced">User is blocked</string>
     <string name="enter_code">Enter code</string>
     <string name="we_ll_never_share_or_sell_your_phone_number_your_privacy_is_100_guaranteed">We\'ll never share or sell your phone number your privacy is 100% guaranteed.</string>
-    <string name="enter_the_sms_verification_code_below_that_was_sent_to_your_mobile_phone">Enter the SMS verification code below that was sent to your mobile phone</string>
+    <string name="enter_the_sms_verification_code_below_that_was_sent_to_your_mobile_phone">Enter the SMS verification code below that was sent to your email address</string>
     <string name="inc_code_verification">Incorrect code verification</string>
     <string name="you_will_receive_4_digit">You will receive 4 digit code on your mobile</string>
     <string name="resend">Resend</string>
@@ -143,5 +143,16 @@
     <string name="all">All</string>
     <string name="inv_email_pass">Invalid email or password</string>
     <string name="user_blocked">User blocked</string>
+    <string name="ch_cat_type">Choose category type</string>
+    <string name="family_offer">Family offer</string>
+    <string name="individual_offer">Individual offer</string>
+    <string name="offer">Offer</string>
+    <string name="special_offer">Special Offer</string>
+    <string name="offer_details">Offer Details</string>
+    <string name="how_to_use">How to use</string>
+    <string name="address">Address</string>
+    <string name="merchant_info">Merchant Info</string>
+    <string name="location">Location</string>
+    <string name="have_a_problem">Have a problem ?</string>
 
 </resources>

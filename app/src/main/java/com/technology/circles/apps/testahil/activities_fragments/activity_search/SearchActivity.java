@@ -1,6 +1,7 @@
 package com.technology.circles.apps.testahil.activities_fragments.activity_search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.ActivitySearchBinding;
+import com.technology.circles.apps.testahil.activities_fragments.activity_product_details.ProductDetailsActivity;
 import com.technology.circles.apps.testahil.adapter.ProductAdapter;
 import com.technology.circles.apps.testahil.interfaces.Listeners;
 import com.technology.circles.apps.testahil.language.LanguageHelper;
@@ -205,5 +207,9 @@ public class SearchActivity extends AppCompatActivity implements Listeners.BackL
     }
 
 
-
+    public void setItemProduct(ProductModel model) {
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra("data",model);
+        startActivity(intent);
+    }
 }

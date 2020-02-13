@@ -14,14 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.CategoryAllRow2Binding;
+import com.creative.share.apps.testahil.databinding.CategoryLoadMoreBinding;
 import com.creative.share.apps.testahil.databinding.CategoryRow2Binding;
-import com.creative.share.apps.testahil.databinding.LoadMoreBinding;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_NearBy;
 import com.technology.circles.apps.testahil.models.CategoryDataModel;
 
 import java.util.List;
 
 public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private final int LOAD_DATA = 1;
     private final int LOAD_MORE = 2;
     private final int LOAD_ALL_DATA = 3;
@@ -54,10 +55,10 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             CategoryRow2Binding binding = DataBindingUtil.inflate(inflater, R.layout.category_row2,parent,false);
             return new MyHolder(binding);
         }else
-            {
-                LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
-                return new LoadMoreHolder(binding);
-            }
+        {
+            CategoryLoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.category_load_more,parent,false);
+            return new LoadMoreHolder(binding);
+        }
     }
 
     @Override
@@ -72,30 +73,28 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
             }else if (holder instanceof MyAllHolder)
             {
-                Log.e("1",position+"__");
                 MyAllHolder myAllHolder = (MyAllHolder) holder;
                 myAllHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary));
                 myAllHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
 
             }
         }else
+        {
+            if (holder instanceof MyHolder)
             {
-                if (holder instanceof MyHolder)
-                {
-                    MyHolder myHolder = (MyHolder) holder;
-                    myHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.black));
-                    myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
-                }else if (holder instanceof MyAllHolder)
-                {
-                    Log.e("2","2");
+                MyHolder myHolder = (MyHolder) holder;
+                myHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.black));
+                myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
+            }else if (holder instanceof MyAllHolder)
+            {
 
-                    MyAllHolder myAllHolder = (MyAllHolder) holder;
+                MyAllHolder myAllHolder = (MyAllHolder) holder;
 
-                    myAllHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.black));
-                    myAllHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
+                myAllHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.black));
+                myAllHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
 
-                }
             }
+        }
 
 
         if (holder instanceof MyHolder)
@@ -108,7 +107,7 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             myHolder.itemView.setOnClickListener(view -> {
 
                 selectedPos = myHolder.getAdapterPosition();
-                CategoryDataModel.CategoryModel model2 = list.get(selectedPos);
+                CategoryDataModel.CategoryModel model2 = list.get(myHolder.getAdapterPosition());
 
                 if (fragment instanceof Fragment_NearBy)
                 {
@@ -168,8 +167,8 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public class LoadMoreHolder extends RecyclerView.ViewHolder {
-        private LoadMoreBinding binding;
-        public LoadMoreHolder(@NonNull LoadMoreBinding binding) {
+        private CategoryLoadMoreBinding binding;
+        public LoadMoreHolder(@NonNull CategoryLoadMoreBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -182,15 +181,15 @@ public class CategoryMapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         {
             return LOAD_ALL_DATA;
         }else
+        {
+            if (list.get(position)==null)
             {
-                if (list.get(position)==null)
-                {
-                    return LOAD_MORE;
-                }else
-                    {
-                        return LOAD_DATA;
-                    }
+                return LOAD_MORE;
+            }else
+            {
+                return LOAD_DATA;
             }
+        }
 
 
     }

@@ -7,6 +7,7 @@ import com.technology.circles.apps.testahil.models.CityDataModel;
 import com.technology.circles.apps.testahil.models.PlaceGeocodeData;
 import com.technology.circles.apps.testahil.models.PlaceMapDetailsData;
 import com.technology.circles.apps.testahil.models.ProductDataModel;
+import com.technology.circles.apps.testahil.models.ProductModel;
 import com.technology.circles.apps.testahil.models.UserModel;
 
 import okhttp3.ResponseBody;
@@ -37,7 +38,7 @@ public interface Service {
     @GET("api/all-categories")
     Call<CategoryDataModel> getCategories(@Header("Authorization") String token,
                                           @Header("lang") String lang,
-                                          @Query("page")int page
+                                          @Query("page") int page
     );
 
     @FormUrlEncoded
@@ -74,6 +75,15 @@ public interface Service {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/register")
+    Call<UserModel> signUp(@Field("name") String name,
+                           @Field("email") String email,
+                           @Field("phone") String phone,
+                           @Field("password") String password,
+                           @Field("software_type") String software_type
+    );
+
 
     @FormUrlEncoded
     @POST("api/logout")
@@ -95,9 +105,62 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/productsByName")
     Call<ProductDataModel> searchByName(@Header("lang") String lang,
-                                    @Header("Authorization") String token,
-                                    @Field("product_name") String product_name
+                                        @Header("Authorization") String token,
+                                        @Field("product_name") String product_name
 
+    );
+
+    @FormUrlEncoded
+    @POST("api/new-offer-suggestion")
+    Call<ResponseBody> makeOffer(@Header("lang") String lang,
+                                 @Header("Authorization") String token,
+                                 @Field("work_department_name") String work_department_name,
+                                 @Field("cat_id") String cat_id,
+                                 @Field("manager_name") String manager_name,
+                                 @Field("phone") String phone,
+                                 @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("api/single-product")
+    Call<ProductModel> singleProduct(@Header("lang") String lang,
+                                     @Header("Authorization") String token,
+                                     @Field("product_id") int product_id
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/product/love")
+    Call<ResponseBody> like_dislike(@Header("lang") String lang,
+                                    @Header("Authorization") String token,
+                                    @Field("product_id") int product_id
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/products-filter")
+    Call<ProductDataModel> filter(@Header("lang") String lang,
+                                  @Header("Authorization") String token,
+                                  @Field("special_filter") String special_filter,
+                                  @Field("most_view_filter") String most_view_filter,
+                                  @Field("distance_filter") String distance_filter,
+                                  @Field("city_id") int city_id,
+                                  @Field("category_filter") String category_filter,
+                                  @Field("company_filter") String company_filter,
+                                  @Field("discount_percentage_filter") String discount_percentage_filter
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/confirmCodeCheck")
+    Call<UserModel> checkCode(@Field("user_id") int user_id,
+                                 @Field("code") String code
+    );
+
+    @FormUrlEncoded
+    @POST("api/confirmCodeResend")
+    Call<ResponseBody> reSendCode(@Field("user_id") int user_id
     );
 
 }

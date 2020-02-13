@@ -25,6 +25,7 @@ public class ProductDataModel implements Serializable {
         private String location;
         private String city_id;
         private String followers_count;
+        private String company_type;
         private CityModel city;
 
 
@@ -97,6 +98,10 @@ public class ProductDataModel implements Serializable {
 
         public CityModel getCity() {
             return city;
+        }
+
+        public String getCompany_type() {
+            return company_type;
         }
     }
 

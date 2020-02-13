@@ -86,7 +86,7 @@
     <string name="blokced">تم حظر المستخدم</string>
     <string name="enter_code">أدخل الرمز</string>
     <string name="we_ll_never_share_or_sell_your_phone_number_your_privacy_is_100_guaranteed">بياناتك في الحفظ والصون لدينا، ماراح نشارك بياناتك مع اي احد ولأي سبب.</string>
-    <string name="enter_the_sms_verification_code_below_that_was_sent_to_your_mobile_phone">أرجو منك إدخال الرمز المرسل إلى هاتفك الجوال.</string>
+    <string name="enter_the_sms_verification_code_below_that_was_sent_to_your_mobile_phone">أرجو منك إدخال الرمز المرسل إلى البريد الالكتروني الخاص بك.</string>
     <string name="inc_code_verification">رمز التحقق غير صحيح</string>
     <string name="you_will_receive_4_digit">ارسلنا لك رمز التفعيل على جوالك نرجو منك إدخال الرمز.</string>
     <string name="resend">أعد الارسال</string>
@@ -149,5 +149,16 @@
     <string name="all">الكل</string>
     <string name="inv_email_pass">البريد الإلكتروني او كلمة المرور غير صحيحة</string>
     <string name="user_blocked">تم حظر المستخدم</string>
+    <string name="ch_cat_type">إختر نوع النشاط</string>
+    <string name="family_offer">عرض عائلي</string>
+    <string name="individual_offer">عرض فرد</string>
+    <string name="offer">العرض</string>
+    <string name="special_offer">عرض خاص</string>
+    <string name="offer_details">تفاصيل العرض</string>
+    <string name="how_to_use">طريقة الاستخدام</string>
+    <string name="address">العنوان</string>
+    <string name="merchant_info">معلومات التاجر</string>
+    <string name="location">الموقع</string>
+    <string name="have_a_problem">لديك مشكلة ؟</string>
 
 </resources>

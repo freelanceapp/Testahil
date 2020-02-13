@@ -22,6 +22,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name="com.technology.circles.apps.testahil.activities_fragments.activity_product_details.ProductDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:theme="@style/dialog"
+            />
         <activity
             android:name="com.technology.circles.apps.testahil.activities_fragments.activity_search.SearchActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

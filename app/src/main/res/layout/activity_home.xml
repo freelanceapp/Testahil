@@ -96,12 +96,14 @@
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:text="Name"
+                        android:layout_gravity="center_horizontal"
+
                         />
 
                     <LinearLayout
@@ -332,41 +334,38 @@
 
                                 />
 
-                            <RadioGroup
-                                android:layout_width="match_parent"
+                            <RadioButton
+                                android:id="@+id/rbOnline"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:button="@drawable/rb_bg"
+                                android:textSize="14sp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/merchant_online"
+                                android:layout_marginTop="15sp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
 
-                                >
-                                <RadioButton
-                                    android:id="@+id/rbBranch"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:button="@drawable/rb_bg"
-                                    android:textSize="14sp"
-                                    android:paddingStart="8dp"
-                                    android:paddingEnd="8dp"
-                                    android:textColor="@color/colorPrimary"
-                                    android:text="@string/merchant_online"
+                                />
 
-                                    />
+                            <RadioButton
 
-                                <RadioButton
-                                    android:id="@+id/rbOnline"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:button="@drawable/rb_bg"
-                                    android:textSize="14sp"
-                                    android:paddingStart="8dp"
-                                    android:paddingEnd="8dp"
-                                    android:textColor="@color/colorPrimary"
-                                    android:text="@string/merchant_branch"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_marginBottom="8dp"
-                                    />
-                            </RadioGroup>
+                                android:id="@+id/rbBranch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/rb_bg"
+                                android:textSize="14sp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/merchant_branch"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                />
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>

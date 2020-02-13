@@ -1,5 +1,7 @@
 package com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.FragmentFavoriteBinding;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
+import com.technology.circles.apps.testahil.activities_fragments.activity_product_details.ProductDetailsActivity;
 import com.technology.circles.apps.testahil.adapter.ProductAdapter;
 import com.technology.circles.apps.testahil.models.ProductDataModel;
 import com.technology.circles.apps.testahil.models.ProductModel;
@@ -41,6 +45,7 @@ public class Fragment_Favorite extends Fragment {
     private UserModel userModel;
     private List<ProductModel> productModelList;
     private ProductAdapter productAdapter;
+    private int selectedPos = -1;
 
 
 
@@ -74,7 +79,7 @@ public class Fragment_Favorite extends Fragment {
     }
 
 
-    private void getProduct()
+    public void getProduct()
     {
         try {
 
@@ -146,4 +151,33 @@ public class Fragment_Favorite extends Fragment {
         }
     }
 
+    public void setItemProduct(ProductModel model, int adapterPosition) {
+        this.selectedPos = adapterPosition;
+        Intent intent = new Intent(activity, ProductDetailsActivity.class);
+        intent.putExtra("data",model);
+        startActivityForResult(intent,100);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode== Activity.RESULT_OK)
+        {
+            if (productModelList.size()>0&&selectedPos!=-1)
+            {
+                productModelList.remove(selectedPos);
+                productAdapter.notifyItemRemoved(selectedPos);
+
+                if (productModelList.size()>0)
+                {
+                    binding.tvNoData.setVisibility(View.GONE);
+                }else
+                    {
+                        binding.tvNoData.setVisibility(View.VISIBLE);
+
+                    }
+            }
+        }
+    }
 }

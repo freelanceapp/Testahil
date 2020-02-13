@@ -1,23 +1,35 @@
 package com.technology.circles.apps.testahil.activities_fragments.activity_code_verification;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.ActivityCodeVerificationBinding;
+import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
 import com.technology.circles.apps.testahil.language.LanguageHelper;
 import com.technology.circles.apps.testahil.models.UserModel;
 import com.technology.circles.apps.testahil.preferences.Preferences;
+import com.technology.circles.apps.testahil.remote.Api;
 import com.technology.circles.apps.testahil.share.Common;
+import com.technology.circles.apps.testahil.tags.Tags;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CodeVerificationActivity extends AppCompatActivity {
     private ActivityCodeVerificationBinding binding;
@@ -36,7 +48,17 @@ public class CodeVerificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_code_verification);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+
+        Intent intent = getIntent();
+        if (intent!=null&&intent.hasExtra("data"))
+        {
+            userModel = (UserModel) intent.getSerializableExtra("data");
+        }
     }
 
     private void initView() {
@@ -70,47 +92,44 @@ public class CodeVerificationActivity extends AppCompatActivity {
 
     private void ValidateCode(String code)
     {
-        /*ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
         try {
 
             Api.getService(Tags.base_url)
-                    .confirmCode(userModel.getId(),code)
+                    .checkCode(userModel.getId(),code)
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                             dialog.dismiss();
                             if (response.isSuccessful()&&response.body()!=null)
                             {
-                                preferences.create_update_userData(activity,response.body());
-                                preferences.createSession(activity, Tags.session_login);
+                                userModel.setIs_confirmed("1");
+                                preferences.create_update_userData(CodeVerificationActivity.this,userModel);
+                                preferences.createSession(CodeVerificationActivity.this, Tags.session_login);
 
-                                if (!activity.isOut)
-                                {
-                                    Intent intent = new Intent(activity, HomeActivity.class);
-                                    startActivity(intent);
-                                }
-
-                                activity.finish();
+                                Intent intent = new Intent(CodeVerificationActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
 
                             }else
                             {
 
                                 if (response.code() == 422) {
-                                    Toast.makeText(activity,"Error Validation", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this,"Error Validation", Toast.LENGTH_SHORT).show();
                                 } else if (response.code() == 500) {
-                                    Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
 
                                 }else if (response.code()==401)
                                 {
-                                    Toast.makeText(activity, R.string.inc_code, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this, R.string.inc_code, Toast.LENGTH_SHORT).show();
 
                                 }else
                                 {
-                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                     try {
 
@@ -133,10 +152,10 @@ public class CodeVerificationActivity extends AppCompatActivity {
                                     Log.e("error",t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect")||t.getMessage().toLowerCase().contains("unable to resolve host"))
                                     {
-                                        Toast.makeText(activity,R.string.something, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CodeVerificationActivity.this,R.string.something, Toast.LENGTH_SHORT).show();
                                     }else
                                     {
-                                        Toast.makeText(activity,t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CodeVerificationActivity.this,t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -151,7 +170,7 @@ public class CodeVerificationActivity extends AppCompatActivity {
         {
             dialog.dismiss();
             Log.e("dddd",e.getMessage()+"_");
-        }*/
+        }
     }
 
     private void startCounter()
@@ -176,15 +195,15 @@ public class CodeVerificationActivity extends AppCompatActivity {
     }
 
     private void reSendSMSCode() {
-        /*final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         try {
             Api.getService(Tags.base_url)
-                    .resendCode(userModel.getId())
-                    .enqueue(new Callback<UserModel>() {
+                    .reSendCode(userModel.getId())
+                    .enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                             dialog.dismiss();
 
@@ -201,19 +220,19 @@ public class CodeVerificationActivity extends AppCompatActivity {
                                 }
                                 if (response.code()==422)
                                 {
-                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }else if (response.code()==500)
                                 {
-                                    Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                                 }else
                                 {
-                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CodeVerificationActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<UserModel> call, Throwable t) {
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
                             try {
                                 dialog.dismiss();
                                 if (t.getMessage()!=null)
@@ -221,10 +240,10 @@ public class CodeVerificationActivity extends AppCompatActivity {
                                     Log.e("error",t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect")||t.getMessage().toLowerCase().contains("unable to resolve host"))
                                     {
-                                        Toast.makeText(activity,R.string.something, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CodeVerificationActivity.this,R.string.something, Toast.LENGTH_SHORT).show();
                                     }else
                                     {
-                                        Toast.makeText(activity,t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CodeVerificationActivity.this,t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -239,7 +258,7 @@ public class CodeVerificationActivity extends AppCompatActivity {
         {
             dialog.dismiss();
             Log.e("ddd",e.getMessage()+"__");
-        }*/
+        }
 
     }
 

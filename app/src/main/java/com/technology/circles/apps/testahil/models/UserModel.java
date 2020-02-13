@@ -74,4 +74,8 @@ public class UserModel implements Serializable {
     public String getToken() {
         return token;
     }
+
+    public void setIs_confirmed(String is_confirmed) {
+        this.is_confirmed = is_confirmed;
+    }
 }

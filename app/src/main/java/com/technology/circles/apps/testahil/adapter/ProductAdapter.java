@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.LoadMoreBinding;
 import com.creative.share.apps.testahil.databinding.ProductRowBinding;
+import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Favorite;
+import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Offers;
+import com.technology.circles.apps.testahil.activities_fragments.activity_search.SearchActivity;
 import com.technology.circles.apps.testahil.models.ProductModel;
 
 import java.util.List;
@@ -30,12 +34,15 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Fragment fragment;
     private LayoutInflater inflater;
     private String lang;
+    private AppCompatActivity activity;
 
     public ProductAdapter(List<ProductModel> list, Context context, Fragment fragment) {
         this.list = list;
         this.context = context;
         this.fragment = fragment;
         inflater = LayoutInflater.from(context);
+        activity = (AppCompatActivity) context;
+
         Paper.init(context);
         lang = Paper.book().read("lang","ar");
     }
@@ -64,12 +71,47 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             myHolder.binding.setLang(lang);
             myHolder.binding.setModel(model);
 
+
+            myHolder.itemView.setOnClickListener(view -> {
+
+                if (fragment==null){
+                    if (activity instanceof SearchActivity)
+                    {
+                        ProductModel model2 = list.get(myHolder.getAdapterPosition());
+
+                        SearchActivity searchActivity = (SearchActivity) activity;
+                        searchActivity.setItemProduct(model2);
+                    }
+                }else
+                    {
+
+                        if (fragment instanceof Fragment_Offers)
+                        {
+                            ProductModel model2 = list.get(myHolder.getAdapterPosition());
+
+                            Fragment_Offers fragment_offers = (Fragment_Offers) fragment;
+                            fragment_offers.setItemProduct(model2);
+                        }else if (fragment instanceof Fragment_Favorite)
+                        {
+                            Fragment_Favorite fragment_favorite = (Fragment_Favorite) fragment;
+                            ProductModel model2 = list.get(myHolder.getAdapterPosition());
+                            fragment_favorite.setItemProduct(model2,myHolder.getAdapterPosition());
+
+                        }
+                    }
+
+
+            });
+
+
         }else if (holder instanceof LoadMoreHolder)
         {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
             loadMoreHolder.binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             loadMoreHolder.binding.progBar.setIndeterminate(true);
         }
+
+
     }
 
     @Override

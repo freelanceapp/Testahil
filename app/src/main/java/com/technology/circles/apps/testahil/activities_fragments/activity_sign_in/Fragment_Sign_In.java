@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.FragmentSignInBinding;
+import com.google.gson.Gson;
+import com.technology.circles.apps.testahil.activities_fragments.activity_code_verification.CodeVerificationActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_sign_up.SignUpActivity;
 import com.technology.circles.apps.testahil.interfaces.Listeners;
@@ -105,14 +107,22 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
 
                             } else {
 
-                                try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                if (response.code() == 409) {
 
-                                if (response.code() == 500) {
+                                    try {
+                                        UserModel userModel = new Gson().fromJson(response.errorBody().string(),UserModel.class);
+
+                                        Intent intent = new Intent(activity, CodeVerificationActivity.class);
+                                        intent.putExtra("data",userModel);
+                                        startActivity(intent);
+                                        activity.finish();
+
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if (response.code() == 500) {
                                     Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
 
 
@@ -129,6 +139,14 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
 
 
                                 }
+
+                                try {
+
+                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
                         }
 

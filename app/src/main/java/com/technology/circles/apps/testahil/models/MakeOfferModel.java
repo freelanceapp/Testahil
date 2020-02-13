@@ -3,6 +3,7 @@ package com.technology.circles.apps.testahil.models;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -66,6 +67,10 @@ public class MakeOfferModel extends BaseObservable implements Serializable {
                     error_phone.set(null);
 
                 }
+
+            if (workId.isEmpty()) {
+                Toast.makeText(context, R.string.ch_cat_type, Toast.LENGTH_SHORT).show();
+            }
 
 
 

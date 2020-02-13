@@ -24,6 +24,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -83,14 +84,15 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_NearBy fragment_nearBy;
     private Fragment_Setting fragment_setting;
 
-    private LinearLayout llMainContent, llContentSearch, llHomeContent, llMakeOffer, llFavorite;
+    private LinearLayout llMainContent, llContentSearch, llMakeOffer, llFavorite;
+    private CoordinatorLayout llHomeContent;
     private ImageView imageFilter, imageSearch;
     private CardView cardViewCity;
     private RoundedImageView arrow;
     private ExpandableLayout expandLayout;
     private RecyclerView recViewCity;
     private ProgressBar progBarCity;
-    private TextView tvNoCityData,tvDisableFilter;
+    private TextView tvNoCityData,tvDisableFilter,tvName;
     private Button btnLogout;
     private RadioButton rbBranch,rbOnline;
     private CityAdapter cityAdapter;
@@ -98,7 +100,7 @@ public class HomeActivity extends AppCompatActivity {
     private int isFilter = 0;
     ////////////////////////////////////////////////////
     private int city_id =0;
-
+    private int merchant_type=0;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -139,6 +141,7 @@ public class HomeActivity extends AppCompatActivity {
         imageSearch = findViewById(R.id.imageSearch);
         btnLogout = findViewById(R.id.btnLogout);
         tvDisableFilter = findViewById(R.id.tvDisableFilter);
+        tvName = findViewById(R.id.tvName);
 
         rbBranch = findViewById(R.id.rbBranch);
         rbOnline = findViewById(R.id.rbOnline);
@@ -159,10 +162,12 @@ public class HomeActivity extends AppCompatActivity {
         recViewCity.setLayoutManager(new LinearLayoutManager(this));
         cityAdapter = new CityAdapter(cityModelList,this);
         recViewCity.setAdapter(cityAdapter);
-
-
-
         ah_bottom_nav = findViewById(R.id.ah_bottom_nav);
+
+        if (userModel!=null)
+        {
+            tvName.setText(userModel.getName());
+        }
 
         tab.addTab(tab.newTab().setText("عربي"));
         tab.addTab(tab.newTab().setText("English"));
@@ -183,6 +188,7 @@ public class HomeActivity extends AppCompatActivity {
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
 
                 if (isFilter == 1) {
 
@@ -214,12 +220,22 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         rbBranch.setOnClickListener(view -> {
-
+            rbBranch.setChecked(true);
+            rbOnline.setChecked(false);
+            drawer.closeDrawer(GravityCompat.START);
+            merchant_type = 1;
+            DisplayFragmentOffer();
         });
 
         rbOnline.setOnClickListener(view -> {
+            rbBranch.setChecked(false);
+            rbOnline.setChecked(true);
+            drawer.closeDrawer(GravityCompat.START);
+            merchant_type = 2;
+            DisplayFragmentOffer();
 
         });
+
 
         imageFilter.setOnClickListener(view -> {
             llMainContent.setVisibility(View.GONE);
@@ -295,10 +311,17 @@ public class HomeActivity extends AppCompatActivity {
         tvDisableFilter.setOnClickListener(view -> {
             rbOnline.setChecked(false);
             rbBranch.setChecked(false);
+            this.city_id =0;
+            this.merchant_type =0;
+            DisplayFragmentOffer();
             if (cityAdapter!=null&&cityModelList.size()>0)
             {
                 cityAdapter.clearSelection();
             }
+            drawer.closeDrawer(GravityCompat.START);
+
+
+
         });
 
         getCities();
@@ -420,7 +443,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void DisplayFragmentOffer() {
         if (fragment_offers == null) {
-            fragment_offers = Fragment_Offers.newInstance();
+            fragment_offers = Fragment_Offers.newInstance(city_id,merchant_type);
         }
 
         if (fragment_favorite != null && fragment_favorite.isAdded()) {
@@ -438,6 +461,25 @@ public class HomeActivity extends AppCompatActivity {
 
         if (fragment_offers.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_offers).commit();
+            if (city_id==0&&merchant_type==0)
+            {
+                fragment_offers.getProduct();
+
+            }else
+                {
+                    if (merchant_type==1) {
+                        fragment_offers.getProductFilter("local",city_id);
+                    }else if (merchant_type==2)
+                    {
+                        fragment_offers.getProductFilter("online",city_id);
+
+                    }else
+                    {
+                        fragment_offers.getProductFilter("disable",city_id);
+
+                    }
+                }
+
 
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_home_container, fragment_offers, "fragment_offers").addToBackStack("fragment_offers").commit();
@@ -467,6 +509,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if (fragment_favorite.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_favorite).commit();
+            fragment_favorite.getProduct();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_home_container, fragment_favorite, "fragment_favorite").addToBackStack("fragment_favorite").commit();
 
@@ -476,7 +519,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void DisplayFragmentNearBy() {
 
-        fragment_nearBy = Fragment_NearBy.newInstance();
+        if (fragment_nearBy==null)
+        {
+            fragment_nearBy = Fragment_NearBy.newInstance();
+
+        }
 
         if (fragment_offers != null && fragment_offers.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_offers).commit();
@@ -666,7 +713,12 @@ public class HomeActivity extends AppCompatActivity {
     public void setItemCityData(CityDataModel.CityModel cityModel) {
         if (city_id!=cityModel.getId_city())
         {
+            drawer.closeDrawer(GravityCompat.START);
+
             city_id = cityModel.getId_city();
+
+            DisplayFragmentOffer();
+
         }
     }
 }
