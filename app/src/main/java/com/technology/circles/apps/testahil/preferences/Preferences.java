@@ -52,13 +52,6 @@ public class Preferences {
         return new Gson().fromJson(userDataGson,UserModel.class);
     }
 
-
-
-
-
-
-
-
     public void createSession(Context context,String session)
     {
         SharedPreferences preferences = context.getSharedPreferences("sessionPref",Context.MODE_PRIVATE);
@@ -80,10 +73,6 @@ public class Preferences {
         editor. putBoolean("selected",true);
         editor.apply();
     }
-
-
-
-
 
 
     public void setLastVisit(Context context,String date)

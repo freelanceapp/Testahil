@@ -254,6 +254,12 @@
                             android:paddingStart="8dp"
                             android:paddingEnd="8dp"
                             />
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_whatsapp"
+                       android:layout_gravity="center"
+                            />
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>

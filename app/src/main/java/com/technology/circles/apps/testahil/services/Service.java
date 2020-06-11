@@ -155,8 +155,9 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/confirmCodeCheck")
     Call<UserModel> checkCode(@Field("user_id") int user_id,
-                                 @Field("code") String code
+                              @Field("code") String code
     );
+
 
     @FormUrlEncoded
     @POST("api/confirmCodeResend")

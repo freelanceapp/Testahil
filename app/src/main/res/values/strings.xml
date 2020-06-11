@@ -154,5 +154,6 @@
     <string name="merchant_info">Merchant Info</string>
     <string name="location">Location</string>
     <string name="have_a_problem">Have a problem ?</string>
+    <string name="hello">Hello</string>
 
 </resources>
