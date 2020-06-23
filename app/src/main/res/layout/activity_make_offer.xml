@@ -53,7 +53,7 @@
                     android:padding="8dp"
                     android:rotation='@{lang.equals("ar")?180:0}'
                     android:src="@drawable/ic_left_arrow"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="@color/white" />
 
                 <TextView
 
@@ -65,7 +65,7 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:text="@string/make_an_offer"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
