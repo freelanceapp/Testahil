@@ -228,6 +228,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback, Goo
         binding.tvMore.setVisibility(View.GONE);
         try {
 
+
             if (callProduct != null && callProduct.isExecuted()) {
                 callProduct.cancel();
             }
