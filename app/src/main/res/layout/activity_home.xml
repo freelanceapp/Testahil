@@ -21,19 +21,21 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@drawable/custom_bg2"
         android:fitsSystemWindows="true"
-        android:background="@drawable/btn_gradient"
 
 
         >
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollViewDrawer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             android:fillViewport="true"
+            android:fitsSystemWindows="true"
 
             >
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -46,8 +48,8 @@
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:visibility="visible"
-                    >
+                    android:visibility="visible">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
@@ -55,79 +57,97 @@
 
 
                         >
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="vertical"
+                            android:background="@color/white"
                             android:gravity="center"
 
-                            android:background="@color/white"
-                            >
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="150dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/logo_orange"
-                                />
-                          <!--  <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="13sp"
-                                android:textColor="@color/green"
-                                android:text="المؤسسة العامة للتأمينات الإجتماعية"
-                                android:gravity="center"
-                                android:textStyle="bold"
-                                android:layout_marginTop="5dp"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12sp"
-                                android:textColor="@color/text_splash"
-                                android:text="General Organization For Social Insurance"
-                                android:textStyle="bold"
-                                android:layout_marginTop="5dp"
-                                android:gravity="center"
+                                android:src="@drawable/logo_white" />
+                            <!--  <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:textSize="13sp"
+                                  android:textColor="@color/green"
+                                  android:text="المؤسسة العامة للتأمينات الإجتماعية"
+                                  android:gravity="center"
+                                  android:textStyle="bold"
+                                  android:layout_marginTop="5dp"
+                                  />
+                              <TextView
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:textSize="12sp"
+                                  android:textColor="@color/text_splash"
+                                  android:text="General Organization For Social Insurance"
+                                  android:textStyle="bold"
+                                  android:layout_marginTop="5dp"
+                                  android:gravity="center"
 
-                                />-->
+                                  />-->
                         </LinearLayout>
                     </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/tvName"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                        />
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:gravity="start"
+                            android:textSize="14sp"
+
+                            />
+                        <ImageView
+                            android:background="@drawable/small_rounded_white"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_setting"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:tint="@color/gray9" />
+                    </LinearLayout>
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
                         android:layout_marginTop="20dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/ic_user_empty"
-                            android:tint="@color/white"
                             android:padding="5dp"
-                            />
+                            android:src="@drawable/ic_user_empty"
+                            android:tint="@color/white" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:text="@string/profile"
                             android:textColor="@color/white"
                             android:textSize="15sp"
-                            android:text="@string/profile"
 
                             />
                     </LinearLayout>
@@ -136,94 +156,159 @@
                         android:id="@+id/llFavorite"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
                         android:layout_marginTop="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/ic_star"
-                            android:tint="@color/white"
-                            android:padding="5dp"
                             android:clickable="false"
                             android:longClickable="false"
-                            />
+                            android:padding="5dp"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/white" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:text="@string/favorite"
                             android:clickable="false"
                             android:longClickable="false"
-                            />
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/favorite"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/llMakeOffer"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
                         android:layout_marginTop="5dp"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/ic_discount"
-                            android:tint="@color/white"
-                            android:padding="5dp"
                             android:clickable="false"
                             android:longClickable="false"
-                            />
+                            android:padding="5dp"
+                            android:src="@drawable/ic_discount"
+                            android:tint="@color/white" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:textColor="@color/white"
-                            android:textSize="15sp"
-                            android:text="@string/make_an_offer"
                             android:clickable="false"
                             android:longClickable="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/make_an_offer"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
 
                             />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/llContactUs"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_email"
+                            android:tint="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/contact_us"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llNotification"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_nav_notification"
+                            android:tint="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="@string/notifications"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+
+                            />
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switch_notify"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginRight="18dp"
+                            android:layout_weight=".04" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
+                        android:text="@string/change_language"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:text="@string/change_language"/>
+                        android:textStyle="bold" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="37dp"
-                        android:background="@drawable/rounded_white"
-                        android:layout_marginTop="20dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
-                        >
+                        android:background="@drawable/rounded_white">
+
                         <com.google.android.material.tabs.TabLayout
                             android:id="@+id/tab"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
-                            app:tabGravity="fill"
-                            app:tabMode="fixed"
-                            app:tabIndicatorHeight="0dp"
-                            app:tabSelectedTextColor="@color/colorPrimary"
-                            app:tabTextColor="@color/gray8"
-                            app:tabBackground="@drawable/tab_lang"
                             android:layout_gravity="center_vertical"
-                            />
+                            app:tabBackground="@drawable/tab_lang"
+                            app:tabGravity="fill"
+                            app:tabIndicatorHeight="0dp"
+                            app:tabMode="fixed"
+                            app:tabSelectedTextColor="@color/colorPrimary"
+                            app:tabTextColor="@color/gray8" />
 
                     </FrameLayout>
 
@@ -232,23 +317,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/rounded_white"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
                         android:text="@string/logout"
-                        />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llContentSearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingTop="40dp"
-                    android:visibility="gone"
                     android:background="@color/gray0"
                     android:orientation="vertical"
+                    android:paddingTop="40dp"
+                    android:visibility="gone"
 
 
                     >
@@ -256,13 +340,13 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="3dp"
-                        app:contentPadding="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        >
+                        app:contentPadding="5dp">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -271,28 +355,27 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:textStyle="bold"
-                                android:textSize="17sp"
-                                android:textColor="@color/black"
                                 android:text="@string/filter"
-                                app:layout_constraintStart_toEndOf="@id/tvDisableFilter"
-                                app:layout_constraintTop_toTopOf="parent"
+                                android:textColor="@color/black"
+                                android:textSize="17sp"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias=".2"
-                                />
+                                app:layout_constraintStart_toEndOf="@id/tvDisableFilter"
+                                app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tvDisableFilter"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/disable_all"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="10sp"
-                                android:text="@string/disable_all"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="5dp"
-                                />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
@@ -301,35 +384,33 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
-                        android:background="@color/gray5"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
-                        />
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/gray5" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="3dp"
-                        app:contentPadding="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        >
+                        app:contentPadding="5dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="@string/order_by"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
-                                android:text="@string/order_by"
 
                                 />
 
@@ -337,15 +418,15 @@
                                 android:id="@+id/rbOnline"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="15sp"
+                                android:layout_marginEnd="10dp"
                                 android:button="@drawable/rb_bg"
-                                android:textSize="14sp"
                                 android:paddingStart="8dp"
                                 android:paddingEnd="8dp"
-                                android:textColor="@color/colorPrimary"
                                 android:text="@string/merchant_online"
-                                android:layout_marginTop="15sp"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp"
 
                                 />
 
@@ -354,46 +435,43 @@
                                 android:id="@+id/rbBranch"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="8dp"
                                 android:button="@drawable/rb_bg"
-                                android:textSize="14sp"
                                 android:paddingStart="8dp"
                                 android:paddingEnd="8dp"
-                                android:textColor="@color/colorPrimary"
                                 android:text="@string/merchant_branch"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginBottom="8dp"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                />
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
 
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
-                        android:background="@color/gray5"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="10dp"
-                        />
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/gray5" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardViewCity"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="3dp"
                         app:contentPaddingLeft="15dp"
                         app:contentPaddingRight="15dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
 
 
                         >
@@ -412,31 +490,29 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:textColor="@color/black"
                                 android:text="@string/cities"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/arrow"
-                                />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <com.makeramen.roundedimageview.RoundedImageView
                                 android:id="@+id/arrow"
 
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
+                                android:background="@color/gray2"
+                                android:padding="5dp"
+                                android:src="@drawable/ic_down_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:riv_border_width="0dp"
-                                app:riv_mutate_background="true"
                                 app:riv_corner_radius="10dp"
-                                android:background="@color/gray2"
-                                android:src="@drawable/ic_down_arrow"
-                                android:padding="5dp"
-                                />
+                                app:riv_mutate_background="true" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -448,40 +524,40 @@
                         android:id="@+id/expandLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:el_duration="500"
-                        app:el_parallax=".5"
-                        app:el_expanded="false"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@color/white"
+                        app:el_duration="500"
+                        app:el_expanded="false"
+                        app:el_parallax=".5"
 
                         >
 
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
+                            android:layout_height="wrap_content">
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recViewCity"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
+
                             <ProgressBar
                                 android:id="@+id/progBarCity"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
-                                android:layout_gravity="center"
-                                />
+                                android:layout_gravity="center" />
+
                             <TextView
                                 android:id="@+id/tvNoCityData"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:text="@string/no_data_to_show"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:text="@string/no_data_to_show"
                                 android:textStyle="bold"
-                                android:visibility="gone"
-                                />
+                                android:visibility="gone" />
                         </FrameLayout>
                     </net.cachapa.expandablelayout.ExpandableLayout>
                 </LinearLayout>

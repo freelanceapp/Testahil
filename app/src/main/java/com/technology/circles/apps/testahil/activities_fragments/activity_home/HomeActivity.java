@@ -39,6 +39,7 @@ import com.creative.share.apps.testahil.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.technology.circles.apps.testahil.activities_fragments.activity_contact_us.ContactUsActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Favorite;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_NearBy;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Offers;
@@ -84,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_NearBy fragment_nearBy;
     private Fragment_Setting fragment_setting;
 
-    private LinearLayout llMainContent, llContentSearch, llMakeOffer, llFavorite;
+    private LinearLayout llMainContent, llContentSearch, llMakeOffer, llFavorite,llContactUs;
     private CoordinatorLayout llHomeContent;
     private ImageView imageFilter, imageSearch;
     private CardView cardViewCity;
@@ -156,6 +157,7 @@ public class HomeActivity extends AppCompatActivity {
         progBarCity.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         llMakeOffer = findViewById(R.id.llMakeOffer);
+        llContactUs=findViewById(R.id.llContactUs);
         llFavorite = findViewById(R.id.llFavorite);
 
 
@@ -306,6 +308,14 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         } );
+        llContactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ContactUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         setUpBottomNavigation();
 
         tvDisableFilter.setOnClickListener(view -> {

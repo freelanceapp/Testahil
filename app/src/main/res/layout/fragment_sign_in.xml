@@ -209,7 +209,7 @@
                         android:textSize="15sp"
                         android:text="@string/are_you_forgot_password"
                         android:textColor="@color/gray8"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         />
 
                     <Button

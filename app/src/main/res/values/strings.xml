@@ -9,6 +9,8 @@
     <string name="are_you_forgot_password">Forgot password ?</string>
     <string name="do_you_have_a_new_account">Do you have a new account?</string>
     <string name="create_an_account">Create a new account</string>
+    <string name="login2">login</string>
+
     <string name="user_name">Name</string>
     <string name="phone">Phone Number</string>
     <string name="you_already_have_an_account_log_in">You already have an account! log in</string>

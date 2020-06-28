@@ -9,7 +9,8 @@
     <string name="signup">إنشاء حساب جديد</string>
     <string name="are_you_forgot_password">نسيت كلمة المرور؟</string>
     <string name="do_you_have_a_new_account">هل لديك حساب جديد</string>
-    <string name="create_an_account">إنشاء حساب جديد</string>
+    <string name="create_an_account">لدي حساب بالفعل</string>
+    <string name="login2">دخول</string>
     <string name="user_name">الإسم</string>
     <string name="phone">رقم الجوال</string>
     <string name="you_already_have_an_account_log_in">لديك حساب بالفعل ! سجل الدخول</string>
@@ -18,7 +19,7 @@
     <string name="more">المزيد</string>
     <string name="terms_and_conditions">الشروط والاحكام</string>
     <string name="about_app">عن التطبيق</string>
-    <string name="contact_us">اتصل بنا</string>
+    <string name="contact_us">تواصل معنا</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="skip">تخطي</string>
 
