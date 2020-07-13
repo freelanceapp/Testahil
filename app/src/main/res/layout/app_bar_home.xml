@@ -36,7 +36,26 @@
                     android:layout_height="40dp"
                     android:background="@drawable/small_rounded_white"
                     >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_search"
 
+
+                        />
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_mick"
+
+
+                            />                    </LinearLayout>
                 </FrameLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
@@ -91,14 +110,14 @@
 
                     <ImageView
                         android:id="@+id/imageSearch"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="20dp"
+                        android:layout_height="21dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_search"
+                        android:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/imageFilter"
-                        android:src="@drawable/ic_search"
-                        android:padding="8dp"
-                        android:tint="@color/white"
+                        app:layout_constraintTop_toTopOf="parent"
 
                         />
                     <ImageView
