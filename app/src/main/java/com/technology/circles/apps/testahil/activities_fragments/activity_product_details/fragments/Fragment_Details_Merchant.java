@@ -1,5 +1,6 @@
 package com.technology.circles.apps.testahil.activities_fragments.activity_product_details.fragments;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.technology.circles.apps.testahil.preferences.Preferences;
 import io.paperdb.Paper;
 
 public class Fragment_Details_Merchant extends Fragment {
-    private static final String TAG ="DATA";
+    private static final String TAG = "DATA";
     private FragmentDetailsMerchantBinding binding;
     private ProductDetailsActivity activity;
     private Preferences preferences;
@@ -27,11 +28,10 @@ public class Fragment_Details_Merchant extends Fragment {
     private ProductModel productModel;
 
 
-
     public static Fragment_Details_Merchant newInstance(ProductModel productModel) {
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TAG,productModel);
+        bundle.putSerializable(TAG, productModel);
         Fragment_Details_Merchant fragment_details_offers = new Fragment_Details_Merchant();
         fragment_details_offers.setArguments(bundle);
         return fragment_details_offers;
@@ -54,12 +54,14 @@ public class Fragment_Details_Merchant extends Fragment {
         lang = Paper.book().read("lang", "ar");
 
         Bundle bundle = getArguments();
-        if (bundle!=null)
-        {
+        if (bundle != null) {
 
             productModel = (ProductModel) getArguments().getSerializable(TAG);
         }
         binding.setModel(productModel);
+        binding.tvaddress.setPaintFlags(binding.tvaddress.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvemail.setPaintFlags(binding.tvemail.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        binding.tvphone.setPaintFlags(binding.tvphone.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
     }
 

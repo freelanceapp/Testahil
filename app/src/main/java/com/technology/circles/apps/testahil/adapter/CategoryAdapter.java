@@ -88,14 +88,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 {
                     MyHolder myHolder = (MyHolder) holder;
                     myHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.black));
-                    myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    myHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.gray9));
                 }else if (holder instanceof MyAllHolder)
                 {
 
                     MyAllHolder myAllHolder = (MyAllHolder) holder;
 
                     myAllHolder.binding.image.setColorFilter(ContextCompat.getColor(context,R.color.black));
-                    myAllHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.black));
+                    myAllHolder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.gray9));
 
                 }
             }
