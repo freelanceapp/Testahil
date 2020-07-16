@@ -11,7 +11,9 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -174,32 +176,24 @@ public class HomeActivity extends AppCompatActivity {
         if (userModel != null) {
             tvName.setText(userModel.getName());
         }
-        edt_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-                String query = editable.toString().trim();
-                if (!query.isEmpty())
-                {
-                    Intent intent=new Intent(HomeActivity.this,SearchActivity.class);
-                    intent.putExtra("search",query);
-                    startActivity(intent);
-                }else
-                {
-                    edt_search.setError(getResources().getString(R.string.field_req));
-                }
-            }
-        });
+        edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(actionId==event.getAction()){
+                            String query=edt_search.getText().toString();
+                            if (!query.isEmpty())
+                            {
+                                Intent intent=new Intent(HomeActivity.this,SearchActivity.class);
+                                intent.putExtra("search",query);
+                                startActivity(intent);
+                            }else
+                            {
+                                edt_search.setError(getResources().getString(R.string.field_req));
+                            }
+                            return true;}
+                        return false;
+                        }
+                });
 
         tab.addTab(tab.newTab().setText("عربي"));
         tab.addTab(tab.newTab().setText("English"));
@@ -319,11 +313,11 @@ public class HomeActivity extends AppCompatActivity {
 
         });
 
-        imageSearch.setOnClickListener(view -> {
-            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-            startActivity(intent);
-
-        });
+//        imageSearch.setOnClickListener(view -> {
+//            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+//            startActivity(intent);
+//
+//        });
 
         llMakeOffer.setOnClickListener(view -> navigateToMakeOfferActivity());
         llFavorite.setOnClickListener(view -> {
