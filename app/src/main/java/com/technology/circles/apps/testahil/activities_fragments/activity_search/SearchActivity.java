@@ -48,6 +48,7 @@ public class SearchActivity extends AppCompatActivity implements Listeners.BackL
     private LinearLayoutManager manager;
     private List<ProductModel> productModelList;
     private ProductAdapter adapter;
+    private String search;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -59,10 +60,22 @@ public class SearchActivity extends AppCompatActivity implements Listeners.BackL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+        getDataFromIntent();
         initView();
+        if(search!=null){
+            search(search);
+        }
 
     }
 
+    private void getDataFromIntent() {
+
+        Intent intent = getIntent();
+        if (intent!=null&&intent.getStringExtra("search")!=null)
+        {
+           search=intent.getStringExtra("search");
+        }
+    }
 
     private void initView() {
         preferences = Preferences.newInstance();

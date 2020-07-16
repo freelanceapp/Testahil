@@ -8,9 +8,12 @@ import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -85,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_NearBy fragment_nearBy;
     private Fragment_Setting fragment_setting;
 
-    private LinearLayout llMainContent, llContentSearch, llMakeOffer, llFavorite,llContactUs;
+    private LinearLayout llMainContent, llContentSearch, llMakeOffer, llFavorite, llContactUs;
     private CoordinatorLayout llHomeContent;
     private ImageView imageFilter, imageSearch;
     private CardView cardViewCity;
@@ -93,15 +96,17 @@ public class HomeActivity extends AppCompatActivity {
     private ExpandableLayout expandLayout;
     private RecyclerView recViewCity;
     private ProgressBar progBarCity;
-    private TextView tvNoCityData,tvDisableFilter,tvName;
+    private TextView tvNoCityData, tvDisableFilter, tvName;
     private Button btnLogout;
-    private RadioButton rbBranch,rbOnline;
+    private RadioButton rbBranch, rbOnline;
     private CityAdapter cityAdapter;
+    private EditText edt_search;
     private List<CityDataModel.CityModel> cityModelList;
     private int isFilter = 0;
     ////////////////////////////////////////////////////
-    private int city_id =0;
-    private int merchant_type=0;
+    private int city_id = 0;
+    private int merchant_type = 0;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -143,7 +148,7 @@ public class HomeActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         tvDisableFilter = findViewById(R.id.tvDisableFilter);
         tvName = findViewById(R.id.tvName);
-
+        edt_search = findViewById(R.id.edtSearch);
         rbBranch = findViewById(R.id.rbBranch);
         rbOnline = findViewById(R.id.rbOnline);
 
@@ -154,22 +159,47 @@ public class HomeActivity extends AppCompatActivity {
         recViewCity = findViewById(R.id.recViewCity);
         progBarCity = findViewById(R.id.progBarCity);
         tvNoCityData = findViewById(R.id.tvNoCityData);
-        progBarCity.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        progBarCity.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         llMakeOffer = findViewById(R.id.llMakeOffer);
-        llContactUs=findViewById(R.id.llContactUs);
+        llContactUs = findViewById(R.id.llContactUs);
         llFavorite = findViewById(R.id.llFavorite);
 
 
         recViewCity.setLayoutManager(new LinearLayoutManager(this));
-        cityAdapter = new CityAdapter(cityModelList,this);
+        cityAdapter = new CityAdapter(cityModelList, this);
         recViewCity.setAdapter(cityAdapter);
         ah_bottom_nav = findViewById(R.id.ah_bottom_nav);
 
-        if (userModel!=null)
-        {
+        if (userModel != null) {
             tvName.setText(userModel.getName());
         }
+        edt_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                String query = editable.toString().trim();
+                if (!query.isEmpty())
+                {
+                    Intent intent=new Intent(HomeActivity.this,SearchActivity.class);
+                    intent.putExtra("search",query);
+                    startActivity(intent);
+                }else
+                {
+                    edt_search.setError(getResources().getString(R.string.field_req));
+                }
+            }
+        });
 
         tab.addTab(tab.newTab().setText("عربي"));
         tab.addTab(tab.newTab().setText("English"));
@@ -300,14 +330,13 @@ public class HomeActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
             DisplayFragmentFavorite();
         });
-        btnLogout.setOnClickListener(view ->{
+        btnLogout.setOnClickListener(view -> {
 
-            if (userModel!=null)
-            {
+            if (userModel != null) {
                 logout();
             }
 
-        } );
+        });
         llContactUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,15 +350,13 @@ public class HomeActivity extends AppCompatActivity {
         tvDisableFilter.setOnClickListener(view -> {
             rbOnline.setChecked(false);
             rbBranch.setChecked(false);
-            this.city_id =0;
-            this.merchant_type =0;
+            this.city_id = 0;
+            this.merchant_type = 0;
             DisplayFragmentOffer();
-            if (cityAdapter!=null&&cityModelList.size()>0)
-            {
+            if (cityAdapter != null && cityModelList.size() > 0) {
                 cityAdapter.clearSelection();
             }
             drawer.closeDrawer(GravityCompat.START);
-
 
 
         });
@@ -341,25 +368,23 @@ public class HomeActivity extends AppCompatActivity {
     private void getCities() {
 
         Api.getService(Tags.base_url).
-                getCities("Bearer "+userModel.getToken(),lang).
+                getCities("Bearer " + userModel.getToken(), lang).
                 enqueue(new Callback<CityDataModel>() {
                     @Override
                     public void onResponse(Call<CityDataModel> call, Response<CityDataModel> response) {
                         progBarCity.setVisibility(View.GONE);
-                        if (response.isSuccessful() && response.body() != null&&response.body().getData()!=null) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
 
                             cityModelList.clear();
                             cityModelList.addAll(response.body().getData());
 
-                            if (cityModelList.size()>0)
-                            {
+                            if (cityModelList.size() > 0) {
                                 cityAdapter.notifyDataSetChanged();
                                 tvNoCityData.setVisibility(View.GONE);
-                            }else
-                                {
-                                    tvNoCityData.setVisibility(View.VISIBLE);
+                            } else {
+                                tvNoCityData.setVisibility(View.VISIBLE);
 
-                                }
+                            }
 
                         } else {
                             try {
@@ -397,7 +422,6 @@ public class HomeActivity extends AppCompatActivity {
 
                         } catch (Exception e) {
                         }
-
 
 
                     }
@@ -453,7 +477,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void DisplayFragmentOffer() {
         if (fragment_offers == null) {
-            fragment_offers = Fragment_Offers.newInstance(city_id,merchant_type);
+            fragment_offers = Fragment_Offers.newInstance(city_id, merchant_type);
         }
 
         if (fragment_favorite != null && fragment_favorite.isAdded()) {
@@ -471,24 +495,20 @@ public class HomeActivity extends AppCompatActivity {
 
         if (fragment_offers.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_offers).commit();
-            if (city_id==0&&merchant_type==0)
-            {
+            if (city_id == 0 && merchant_type == 0) {
                 fragment_offers.getProduct();
 
-            }else
-                {
-                    if (merchant_type==1) {
-                        fragment_offers.getProductFilter("local",city_id);
-                    }else if (merchant_type==2)
-                    {
-                        fragment_offers.getProductFilter("online",city_id);
+            } else {
+                if (merchant_type == 1) {
+                    fragment_offers.getProductFilter("local", city_id);
+                } else if (merchant_type == 2) {
+                    fragment_offers.getProductFilter("online", city_id);
 
-                    }else
-                    {
-                        fragment_offers.getProductFilter("disable",city_id);
+                } else {
+                    fragment_offers.getProductFilter("disable", city_id);
 
-                    }
                 }
+            }
 
 
         } else {
@@ -529,8 +549,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void DisplayFragmentNearBy() {
 
-        if (fragment_nearBy==null)
-        {
+        if (fragment_nearBy == null) {
             fragment_nearBy = Fragment_NearBy.newInstance();
 
         }
@@ -721,8 +740,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void setItemCityData(CityDataModel.CityModel cityModel) {
-        if (city_id!=cityModel.getId_city())
-        {
+        if (city_id != cityModel.getId_city()) {
             drawer.closeDrawer(GravityCompat.START);
 
             city_id = cityModel.getId_city();
