@@ -26,5 +26,30 @@
     <color name="text_splash">#998542</color>
     <color name="text_splash2">#205E38</color>
     <color name="black_trans">#55000000</color>
+    <color name="gray10">#f2f2f2</color>
+    <color name="gray11">#5f6366</color>
+    <color name="gray12">#474646</color>
+    <color name="gray13">#dcdcdc</color>
+    <color name="gray14">#939292</color>
+    <color name="gray15">#b1b0b0</color>
+    <color name="gray16">#f5f5f5</color>
+    <color name="third">#f6f6f6</color>
+    <color name="card_bg">#f5f5f3</color>
+    <color name="text_title">#3d64af</color>
+    <color name="white_200">#55ffffff</color>
+    <color name="second_trans">#2223B1FB</color>
+    <color name="circle_bg">#99017B60</color>
+    <color name="red">#920a0c</color>
+    <color name="red2">#ff0000</color>
+    <color name="primary_alpha">#550a4161</color>
+    <color name="color1">#060795</color>
+    <color name="color2">#28245F</color>
+    <color name="color3">#A5D8FF</color>
+    <color name="color4">#00B389</color>
+    <color name="color5">#F6C712</color>
+    <color name="offer_grid_1">#ffc333</color>
+    <color name="offer_grid_2">#C18D0F</color>
+    <color name="trans_black">#55000000</color>
+    <color name="gray1_trans">#ddf5f5f5</color>
 
 </resources>

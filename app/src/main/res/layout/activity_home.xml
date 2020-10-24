@@ -120,7 +120,7 @@
                             android:layout_marginEnd="8dp"
                             android:background="@drawable/small_rounded_white"
                             android:padding="5dp"
-                            android:src="@drawable/ic_setting"
+                            android:src="@drawable/ic_menu"
                             android:tint="@color/gray9"
                             android:visibility="gone" />
                     </LinearLayout>

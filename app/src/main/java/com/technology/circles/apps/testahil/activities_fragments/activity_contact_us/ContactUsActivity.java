@@ -81,13 +81,13 @@ public class ContactUsActivity extends AppCompatActivity implements Listeners.Ba
                 dialog.setCancelable(false);
                 dialog.show();
                 Api.getService(Tags.base_url)
-                        .contactUs(lang,"Bearer "+userModel.getToken(),contactUsModel.getName(),contactUsModel.getEmail(),contactUsModel.getPhone(),contactUsModel.getMessage())
+                        .contactUs(lang,"Bearer "+userModel.getToken(),userModel.getName(),userModel.getEmail(),userModel.getPhone(),contactUsModel.getMessage())
                         .enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 dialog.dismiss();
                                 if (response.isSuccessful() ) {
-                                    Toast.makeText(ContactUsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ContactUsActivity.this, getString(R.string.thanx), Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else {
 

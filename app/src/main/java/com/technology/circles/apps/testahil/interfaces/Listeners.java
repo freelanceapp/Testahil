@@ -10,6 +10,10 @@ public interface Listeners {
         void checkDataLogin();
     }
 
+    interface ShowCountryDialog{
+        void showCountryDialog();
+
+    }
     interface SkipListener
     {
         void skip();
@@ -29,7 +33,22 @@ public interface Listeners {
         void checkDataSignUp(SignUpModel signUpModel);
 
     }
+    interface SettingActions {
 
+        void terms();
+        void aboutApp();
+        void share();
+        void notifications();
+        void onLanguageSetting();
+        void makeOffer();
+        void logout();
+        void settings();
+        void contactUs();
+        void onEditProfile();
+
+
+
+    }
     interface BackListener
     {
         void back();

@@ -462,7 +462,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback, Goo
                 Double lng = Double.parseDouble(model.getCompany().getLongitude());
 
                 LatLng latLng = new LatLng(lat, lng);
-                adLocationList.add(new AdLocation(model.getOffer_title(), model.getPrice() + " " + getString(R.string.sar), latLng, model));
+                adLocationList.add(new AdLocation(model.getCompany_title(), model.getPrice() + " " + getString(R.string.sar), latLng, model));
             }
 
         }

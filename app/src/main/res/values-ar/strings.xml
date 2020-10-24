@@ -9,7 +9,7 @@
     <string name="signup">إنشاء حساب جديد</string>
     <string name="are_you_forgot_password">نسيت كلمة المرور؟</string>
     <string name="do_you_have_a_new_account">هل لديك حساب جديد</string>
-    <string name="create_an_account">لدي حساب بالفعل</string>
+    <string name="create_an_account">ليس لدي حساب</string>
     <string name="login2">دخول</string>
     <string name="user_name">الإسم</string>
     <string name="phone">رقم الجوال</string>
@@ -132,7 +132,7 @@
     <string name="no_data_to_show">لا توجد عناصر لعرضها</string>
     <string name="offers">عروض</string>
     <string name="nearby">قريب</string>
-    <string name="setting">الإعدادات</string>
+    <string name="setting">المزيد</string>
     <string name="all_services_are_reserved_for_homecare_app">جميع الحقوق محفوظة لهذا التطبيق.</string>
     <string name="rate_app">تقييم التطبيق</string>
     <string name="subject">الموضوع</string>
@@ -162,5 +162,9 @@
     <string name="location">الموقع</string>
     <string name="have_a_problem">لديك مشكلة ؟</string>
     <string name="hello">مرحبا</string>
+    <string name="new_account">تسجيل جديد</string>
+    <string name="thanx">شكراً لتواصلك معنا</string>
+    <string name="country_code">كود الدولة</string>
+    <string name="settings">الأعدادات</string>
 
 </resources>

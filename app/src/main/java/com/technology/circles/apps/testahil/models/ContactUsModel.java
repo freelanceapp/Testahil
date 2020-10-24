@@ -86,12 +86,7 @@ public class ContactUsModel extends BaseObservable implements Serializable {
     }
 
     public boolean isDataValid(Context context) {
-        if (!TextUtils.isEmpty(name) &&
-                !TextUtils.isEmpty(email) &&
-                Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-                !TextUtils.isEmpty(phone) &&
-                phone.length()==9&&
-                !TextUtils.isEmpty(message)
+        if (!TextUtils.isEmpty(message)
 
         ) {
             error_name.set(null);
@@ -101,29 +96,6 @@ public class ContactUsModel extends BaseObservable implements Serializable {
 
             return true;
         } else {
-            if (name.isEmpty()) {
-                error_name.set(context.getString(R.string.field_req));
-            } else {
-                error_name.set(null);
-            }
-
-
-            if (email.isEmpty()) {
-                error_email.set(context.getString(R.string.field_req));
-            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                error_email.set(context.getString(R.string.inv_email));
-            } else {
-                error_email.set(null);
-            }
-
-            if (phone.isEmpty()) {
-                error_phone.set(context.getString(R.string.field_req));
-            }else if (phone.length()!=9) {
-                error_phone.set(context.getString(R.string.inv_phone));
-            } else {
-                error_phone.set(null);
-            }
-
 
             if (message.isEmpty()) {
                 error_message.set(context.getString(R.string.field_req));

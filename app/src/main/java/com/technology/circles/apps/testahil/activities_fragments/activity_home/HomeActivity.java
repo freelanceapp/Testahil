@@ -1,5 +1,6 @@
 package com.technology.circles.apps.testahil.activities_fragments.activity_home;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.creative.share.apps.testahil.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.technology.circles.apps.testahil.activities_fragments.activity_contact_us.ContactUsActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.fragments.Fragment_Favorite;
@@ -428,7 +430,7 @@ public class HomeActivity extends AppCompatActivity {
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.offers), R.drawable.ic_tag);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.favorite), R.drawable.ic_heart);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.nearby), R.drawable.ic_pin);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.setting), R.drawable.ic_setting);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.setting), R.drawable.ic_menu2);
 
         ah_bottom_nav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
         ah_bottom_nav.setDefaultBackgroundColor(ContextCompat.getColor(this, R.color.gray2));
@@ -630,7 +632,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    private void logout() {
+    public void logout() {
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();

@@ -28,6 +28,10 @@
             android:theme="@style/dialog"
             />
         <activity
+            android:name="com.technology.circles.apps.testahil.activities_fragments.activity_language.LanguageActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name="com.technology.circles.apps.testahil.activities_fragments.activity_search.SearchActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />

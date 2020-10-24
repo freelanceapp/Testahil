@@ -8,7 +8,7 @@
     <string name="signup">Sign Up</string>
     <string name="are_you_forgot_password">Forgot password ?</string>
     <string name="do_you_have_a_new_account">Do you have a new account?</string>
-    <string name="create_an_account">Create a new account</string>
+    <string name="create_an_account">I don’t have an account</string>
     <string name="login2">login</string>
 
     <string name="user_name">Name</string>
@@ -128,7 +128,7 @@
     <string name="no_data_to_show">No data to show</string>
     <string name="offers">Offers</string>
     <string name="nearby">NearBy</string>
-    <string name="setting">Settings</string>
+    <string name="setting">More</string>
     <string name="rate_app">Rate App</string>
     <string name="subject">Subject</string>
     <string name="message">Message</string>
@@ -157,5 +157,9 @@
     <string name="location">Location</string>
     <string name="have_a_problem">Have a problem ?</string>
     <string name="hello">Hello</string>
+    <string name="new_account">new registration</string>
+    <string name="thanx">Thank you for contacting us</string>
+    <string name="country_code">Country code</string>
+    <string name="settings">الأعدادات</string>
 
 </resources>

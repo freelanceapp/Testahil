@@ -11,22 +11,26 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.creative.share.apps.testahil.BuildConfig;
 import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.FragmentSettingBinding;
 import com.technology.circles.apps.testahil.activities_fragments.activity_contact_us.ContactUsActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
+import com.technology.circles.apps.testahil.activities_fragments.activity_language.LanguageActivity;
+import com.technology.circles.apps.testahil.activities_fragments.activity_make_offer.MakeOfferActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_terms.TermsActivity;
 import com.technology.circles.apps.testahil.interfaces.Listeners;
+import com.technology.circles.apps.testahil.models.UserModel;
 import com.technology.circles.apps.testahil.preferences.Preferences;
+import com.technology.circles.apps.testahil.share.Common;
 
 import io.paperdb.Paper;
 
-public class Fragment_Setting extends Fragment implements Listeners.MoreActions {
+public class Fragment_Setting extends Fragment implements Listeners.SettingActions {
     private FragmentSettingBinding binding;
     private HomeActivity activity;
     private Preferences preferences;
     private String lang;
+    private UserModel userModel;
 
 
 
@@ -48,10 +52,10 @@ public class Fragment_Setting extends Fragment implements Listeners.MoreActions 
         preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang","ar");
-        binding.setAction(this);
+       /* binding.setAction(this);
         binding.tvVersion.setText(String.format("%s %s","Version : ", BuildConfig.VERSION_NAME));
 
-
+*/
     }
 
 
@@ -69,14 +73,10 @@ public class Fragment_Setting extends Fragment implements Listeners.MoreActions 
     }
 
     @Override
-    public void rateApp() {
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + activity.getPackageName())));
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + activity.getPackageName())));
+    public void onEditProfile() {
 
-        }
     }
+
 
     @Override
     public void terms() {
@@ -96,7 +96,39 @@ public class Fragment_Setting extends Fragment implements Listeners.MoreActions 
     }
 
     @Override
-    public void editProfile() {
+    public void notifications() {
 
     }
+
+    @Override
+    public void onLanguageSetting() {
+
+        Intent intent = new Intent(activity, LanguageActivity.class);
+        intent.putExtra("type",1);
+        startActivity(intent);
+    }
+
+    @Override
+    public void makeOffer() {
+        Intent intent = new Intent(activity, MakeOfferActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void logout() {
+        if (userModel != null) {
+            activity.logout();
+        } else {
+            Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
+        }
+
+    }
+
+    @Override
+    public void settings() {
+        Intent intent = new Intent(activity, MakeOfferActivity.class);
+        startActivity(intent);
+    }
+
+
 }

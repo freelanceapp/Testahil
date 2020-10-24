@@ -72,6 +72,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:text="@string/sign_in"
+                        android:visibility="gone"
                         />
                 </FrameLayout>
                 <LinearLayout
@@ -233,7 +234,7 @@
                         android:layout_marginTop="50dp"
                         android:textColor="@color/gray8"
                         android:textSize="15sp"
-                        android:text="@string/create_an_account"
+                        android:text="@string/new_account"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
