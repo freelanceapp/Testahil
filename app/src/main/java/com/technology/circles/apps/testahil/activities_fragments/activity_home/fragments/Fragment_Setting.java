@@ -17,6 +17,7 @@ import com.technology.circles.apps.testahil.activities_fragments.activity_contac
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_language.LanguageActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_make_offer.MakeOfferActivity;
+import com.technology.circles.apps.testahil.activities_fragments.activity_setting.SettingsActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_terms.TermsActivity;
 import com.technology.circles.apps.testahil.interfaces.Listeners;
 import com.technology.circles.apps.testahil.models.UserModel;
@@ -52,10 +53,11 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang","ar");
-       /* binding.setAction(this);
-        binding.tvVersion.setText(String.format("%s %s","Version : ", BuildConfig.VERSION_NAME));
+        binding.setActions(this);
+        binding.setLang(lang);
+        //binding.tvVersion.setText(String.format("%s %s","Version : ", BuildConfig.VERSION_NAME));
 
-*/
+
     }
 
 
@@ -126,7 +128,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
     @Override
     public void settings() {
-        Intent intent = new Intent(activity, MakeOfferActivity.class);
+        Intent intent = new Intent(activity, SettingsActivity.class);
         startActivity(intent);
     }
 

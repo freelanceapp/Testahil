@@ -160,6 +160,6 @@
     <string name="new_account">new registration</string>
     <string name="thanx">Thank you for contacting us</string>
     <string name="country_code">Country code</string>
-    <string name="settings">الأعدادات</string>
+    <string name="settings">Settings</string>
 
 </resources>
