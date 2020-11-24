@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">تستاهل</string>
-    <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
+    <string name="map_api_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="log_in">تسجيل الدخول</string>
     <string name="password">كلمة المرور</string>
     <string name="login">تسجيل الدخول</string>

@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -598,6 +599,8 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback, Goo
     public void onLocationChanged(Location location) {
 
 
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(	24.774265, 46.738586), 10.0f));
         if (googleApiClient != null) {
             LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
             googleApiClient.disconnect();

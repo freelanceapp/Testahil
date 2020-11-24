@@ -160,6 +160,7 @@ public class HomeActivity extends AppCompatActivity {
         rbOnline = findViewById(R.id.rbOnline);
 
 
+
         cardViewCity = findViewById(R.id.cardViewCity);
         arrow = findViewById(R.id.arrow);
         expandLayout = findViewById(R.id.expandLayout);
@@ -184,7 +185,7 @@ public class HomeActivity extends AppCompatActivity {
         edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if(actionId==event.getAction()){
+                       // if(actionId==event.getAction()){
                             String query=edt_search.getText().toString();
                             if (!query.isEmpty())
                             {
@@ -195,9 +196,10 @@ public class HomeActivity extends AppCompatActivity {
                             {
                                 edt_search.setError(getResources().getString(R.string.field_req));
                             }
-                            return true;}
-                        return false;
-                        }
+                            return true;
+                 //   }
+                      //  return false;
+                       }
                 });
 
         tab.addTab(tab.newTab().setText("عربي"));
@@ -318,11 +320,12 @@ public class HomeActivity extends AppCompatActivity {
 
         });
 
-//        imageSearch.setOnClickListener(view -> {
-//            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-//            startActivity(intent);
-//
-//        });
+        imageSearch.setOnClickListener(view -> {
+        /*    Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+            startActivity(intent);*/
+            edt_search.setVisibility(View.VISIBLE);
+
+        });
 
         llMakeOffer.setOnClickListener(view -> navigateToMakeOfferActivity());
         llFavorite.setOnClickListener(view -> {
@@ -433,7 +436,7 @@ public class HomeActivity extends AppCompatActivity {
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.offers), R.drawable.ic_tag);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.favorite), R.drawable.ic_heart);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.nearby), R.drawable.ic_pin);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.setting), R.drawable.ic_menu2);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem("", R.drawable.ic_menu2);
 
         ah_bottom_nav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
         ah_bottom_nav.setDefaultBackgroundColor(ContextCompat.getColor(this, R.color.gray2));

@@ -32,7 +32,6 @@ public class MakeOfferModel extends BaseObservable implements Serializable {
         if (!TextUtils.isEmpty(storeName) &&
                 !TextUtils.isEmpty(email) &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-                !TextUtils.isEmpty(workId) &&
                 !TextUtils.isEmpty(phone)&&
                 phone.length()==9
 
@@ -68,9 +67,7 @@ public class MakeOfferModel extends BaseObservable implements Serializable {
 
                 }
 
-            if (workId.isEmpty()) {
-                Toast.makeText(context, R.string.ch_cat_type, Toast.LENGTH_SHORT).show();
-            }
+
 
 
 

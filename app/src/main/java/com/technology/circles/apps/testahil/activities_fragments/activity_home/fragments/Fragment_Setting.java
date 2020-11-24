@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,8 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     private void initView() {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
+        userModel=preferences.getUserData(activity);
+
         Paper.init(activity);
         lang = Paper.book().read("lang","ar");
         binding.setActions(this);
@@ -121,7 +124,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         if (userModel != null) {
             activity.logout();
         } else {
-            Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
+        //   Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
         }
 
     }

@@ -99,46 +99,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
-                    android:onClick="@{()->actions.notifications()}"
-                    android:orientation="horizontal"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:singleLine="true"
-                        android:text="@string/notifications"
-                        android:textColor="@color/gray11"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="3dp"
-                        android:rotation='@{lang.equals("ar")?180:0}'
-                        android:src="@drawable/ic_right_arrow"
-                        android:tint="@color/gray5" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@drawable/small_rounded_stroke_gray2"
-                    android:layerType="software" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:gravity="center_vertical"
                     android:onClick="@{()->actions.makeOffer()}"
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
@@ -173,7 +133,6 @@
                     android:layout_height="10dp"
                     android:background="@drawable/small_rounded_stroke_gray2"
                     android:layerType="software" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -212,6 +171,46 @@
                     android:layout_height="10dp"
                     android:background="@drawable/small_rounded_stroke_gray2"
                     android:layerType="software" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->actions.notifications()}"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:singleLine="true"
+                        android:text="@string/notifications"
+                        android:textColor="@color/gray11"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_notify"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:padding="3dp"
+                        android:layout_weight=".04" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@drawable/small_rounded_stroke_gray2"
+                    android:layerType="software" />
+
+
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
