@@ -10,6 +10,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
+
     >
 
     <include
@@ -19,13 +20,14 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:layout_marginTop="75dp"
         android:background="@drawable/custom_bg2"
         android:fitsSystemWindows="true"
-android:visibility="gone"
+        android:visibility="gone"
+
         >
 
         <androidx.core.widget.NestedScrollView
