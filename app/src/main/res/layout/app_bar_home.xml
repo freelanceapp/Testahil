@@ -116,12 +116,23 @@
 
                     <!--                </LinearLayout>-->
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/imageFilter"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:padding="8dp"
                         android:src="@drawable/ic_filter"
                         android:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="8dp"
+                        android:visibility="gone"
+                        android:src="@drawable/logo_white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

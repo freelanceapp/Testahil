@@ -77,7 +77,13 @@ public class LanguageActivity extends AppCompatActivity {
 
             }
 
-            updateBtnUi();
+            if (canSelect) {
+//                Paper.book().write("lang",selectedLang);
+//                Language_Helper.updateResources(this,selectedLang);
+//                setResult(RESULT_OK);
+//                finish();
+                RefreshActivity(selectedLang);
+            }
         });
 
 
@@ -97,12 +103,6 @@ public class LanguageActivity extends AppCompatActivity {
                 canSelect = false;
             }
 
-            updateBtnUi();
-
-        });
-
-
-        binding.btnConfirm.setOnClickListener(v -> {
             if (canSelect) {
 //                Paper.book().write("lang",selectedLang);
 //                Language_Helper.updateResources(this,selectedLang);
@@ -110,6 +110,11 @@ public class LanguageActivity extends AppCompatActivity {
 //                finish();
                 RefreshActivity(selectedLang);
             }
+        });
+
+
+        binding.btnConfirm.setOnClickListener(v -> {
+
         });
     }
 

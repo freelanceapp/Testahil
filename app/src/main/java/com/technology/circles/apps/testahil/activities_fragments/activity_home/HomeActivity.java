@@ -105,6 +105,7 @@ public class HomeActivity extends AppCompatActivity {
     private RadioButton rbBranch, rbOnline;
     private CityAdapter cityAdapter;
     private EditText edt_search;
+    private ImageView logo;
     private List<CityDataModel.CityModel> cityModelList;
     private int isFilter = 0;
     ////////////////////////////////////////////////////
@@ -144,6 +145,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.setNavigationIcon(null);*/
         navigationView = findViewById(R.id.nav_view);
+        navigationView.setVisibility(View.GONE);
 //        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 //        toggle.syncState();
         tab = findViewById(R.id.tab);
@@ -151,6 +153,7 @@ public class HomeActivity extends AppCompatActivity {
         llContentSearch = findViewById(R.id.llContentSearch);
         llHomeContent = findViewById(R.id.llHomeContent);
         imageFilter = findViewById(R.id.imageFilter);
+        logo = findViewById(R.id.logo);
         imageSearch = findViewById(R.id.imageSearch);
         btnLogout = findViewById(R.id.btnLogout);
         tvDisableFilter = findViewById(R.id.tvDisableFilter);
@@ -433,9 +436,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setUpBottomNavigation() {
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.offers), R.drawable.ic_tag);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(getString(R.string.offers), R.drawable.offer);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.favorite), R.drawable.ic_heart);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.nearby), R.drawable.ic_pin);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(getString(R.string.nearby), R.drawable.map);
         AHBottomNavigationItem item4 = new AHBottomNavigationItem("", R.drawable.ic_menu2);
 
         ah_bottom_nav.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
@@ -455,15 +458,27 @@ public class HomeActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     DisplayFragmentOffer();
+                    edt_search.setVisibility(View.GONE);
+                    logo.setVisibility(View.GONE);
+
                     break;
                 case 1:
                     DisplayFragmentFavorite();
+                    edt_search.setVisibility(View.GONE);
+                    logo.setVisibility(View.GONE);
+
                     break;
                 case 2:
                     DisplayFragmentNearBy();
+                    edt_search.setVisibility(View.GONE);
+                    logo.setVisibility(View.GONE);
+
                     break;
                 case 3:
                     DisplayFragmentSetting();
+                    edt_search.setVisibility(View.GONE);
+                    logo.setVisibility(View.GONE);
+
                     break;
 
 

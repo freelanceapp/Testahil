@@ -91,80 +91,87 @@
             </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bottom_rounded_bg"
                 android:orientation="vertical"
-                android:background="@color/white"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+
+                android:layout_marginTop="150dp"
+                android:gravity="center"
+
+
                 >
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/consEn"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:layout_marginTop="20dp">
+
                     <TextView
                         android:id="@+id/tvEn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="English"
+                        android:textColor="@color/gray6"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="14sp"
-                        android:textColor="@color/gray6"
-                        android:text="English"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
                         android:id="@+id/imageEn"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_check"
+                        android:tint="@color/colorPrimary"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:tint="@color/colorPrimary"
-                        android:src="@drawable/ic_check"
-                        android:padding="2dp"
-                        android:visibility="gone"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/gray3"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="@color/gray3" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/consAr"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
 
-                    android:layout_marginTop="5dp"
-                    >
+                    android:layout_marginTop="5dp">
+
                     <TextView
                         android:id="@+id/tvAr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="Arabic"
+                        android:textColor="@color/gray6"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:textSize="14sp"
-                        android:textColor="@color/gray6"
-                        android:text="Arabic"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
                         android:id="@+id/imageAr"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_check"
+                        android:tint="@color/colorPrimary"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:tint="@color/colorPrimary"
-                        android:src="@drawable/ic_check"
-                        android:padding="2dp"
-                        android:visibility="gone"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -176,6 +183,7 @@
                 android:textColor="@color/gray9"
                 android:textSize="15sp"
                 android:text="@string/confirm"
+                android:visibility="gone"
                 />
         </LinearLayout>
 

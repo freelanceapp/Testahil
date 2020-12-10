@@ -19,8 +19,8 @@
         >
         <ImageView
             android:id="@+id/image"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             image="@{model.image}"
             android:padding="8dp"
             />

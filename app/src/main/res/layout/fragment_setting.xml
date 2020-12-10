@@ -95,6 +95,16 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/logo_white"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -105,7 +115,12 @@
                     android:paddingEnd="15dp"
 
                     >
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic__offer"
+                        android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -143,7 +158,12 @@
                     android:paddingEnd="15dp"
 
                     >
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_contact"
+                        android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -181,7 +201,12 @@
                     android:paddingEnd="15dp"
 
                     >
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_bell"
+                        android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -222,7 +247,12 @@
                     android:paddingEnd="15dp"
 
                     >
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_setting"
+                        android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -261,7 +291,12 @@
                     android:paddingEnd="15dp"
 
                     >
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_terms"
+                        android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -300,7 +335,12 @@
                     android:paddingEnd="15dp"
 
                     >
-
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_info"
+                        android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -333,8 +373,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     android:gravity="center"
-                    android:layout_marginTop="30dp"
                     android:onClick="@{()->actions.logout()}"
                     android:orientation="horizontal">
                     <ImageView
@@ -343,12 +384,14 @@
                         android:padding="3dp"
                         android:src="@drawable/ic_logout"
                         android:tint="@color/red"
+                        android:visibility="visible"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
                         android:clickable="false"
                         android:longClickable="false"
                         android:singleLine="true"
