@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -97,6 +98,20 @@ public class ProductDetailsActivity extends AppCompatActivity implements Listene
         adapter.AddTitle(titles);
         adapter.AddFragments(fragmentList);
         binding.pager.setAdapter(adapter);
+
+        if (productModel.getCompany().getCompany_type().equals("local")){
+            binding.tvLocal.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
+            binding.icon1.setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary));
+            binding.tvOnline.setTextColor(ContextCompat.getColor(this,R.color.gray6));
+            binding.icon2.setColorFilter(ContextCompat.getColor(this,R.color.gray6));
+
+        }else {
+            binding.tvLocal.setTextColor(ContextCompat.getColor(this,R.color.gray6));
+            binding.icon1.setColorFilter(ContextCompat.getColor(this,R.color.gray6));
+            binding.tvOnline.setTextColor(ContextCompat.getColor(this,R.color.colorPrimary));
+            binding.icon2.setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary));
+
+        }
 
         binding.flContact.setOnClickListener(view -> {
 
