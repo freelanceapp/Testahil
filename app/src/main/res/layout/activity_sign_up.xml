@@ -55,19 +55,10 @@
                     <ImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/logo_white"
+                        android:src="@drawable/logo_orange"
                         android:layout_gravity="center"
                         />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|center_horizontal"
-                        android:layout_marginBottom="10dp"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:text="@string/signup"
-                        />
+
                 </FrameLayout>
                 <LinearLayout
                     android:id="@+id/ll"
@@ -443,7 +434,7 @@
                         android:background="@drawable/btn_gradient"
                         android:textColor="@color/white"
                         android:textSize="15sp"
-                        android:text="@string/signup"
+                        android:text="@string/signup2"
 
                         android:onClick="@{()->signupListener.checkDataSignUp(signUpModel)}"
                         />

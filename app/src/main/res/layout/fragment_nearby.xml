@@ -116,6 +116,7 @@
                    android:textColor="@color/white"
                    android:textSize="15sp"
                    android:text="@string/more"
+
                    app:layout_constraintTop_toTopOf="parent"
                    app:layout_constraintBottom_toBottomOf="parent"
                    app:layout_constraintEnd_toEndOf="parent"

@@ -103,7 +103,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:src="@drawable/logo_white"/>
+                    android:src="@drawable/logo_orange"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,48 +143,6 @@
                         android:tint="@color/gray5" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@drawable/small_rounded_stroke_gray2"
-                    android:layerType="software" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:gravity="center_vertical"
-                    android:onClick="@{()->actions.contactUs()}"
-                    android:orientation="horizontal"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-
-                    >
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:padding="3dp"
-                        android:src="@drawable/ic_contact"
-                        android:tint="@color/gray5" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:singleLine="true"
-                        android:text="@string/contact_us"
-                        android:textColor="@color/gray11"
-                        android:textSize="14sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:padding="3dp"
-                        android:rotation='@{lang.equals("ar")?180:0}'
-                        android:src="@drawable/ic_right_arrow"
-                        android:tint="@color/gray5" />
-                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -241,7 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
-                    android:onClick="@{()->actions.settings()}"
+                    android:onClick="@{()->actions.onLanguageSetting()}"
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
@@ -251,7 +209,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_setting"
+                        android:src="@drawable/ic_language"
                         android:tint="@color/gray5" />
                     <TextView
                         android:layout_width="0dp"
@@ -262,7 +220,7 @@
                         android:clickable="false"
                         android:longClickable="false"
                         android:singleLine="true"
-                        android:text="@string/settings"
+                        android:text="@string/language_settings"
                         android:textColor="@color/gray11"
                         android:textSize="14sp" />
 
@@ -280,7 +238,91 @@
                     android:layout_height="10dp"
                     android:background="@drawable/small_rounded_stroke_gray2"
                     android:layerType="software" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->actions.onEditProfile()}"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
 
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_user_empty"
+                        android:tint="@color/gray5" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:singleLine="true"
+                        android:text="@string/edit_profile"
+                        android:textColor="@color/gray11"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="3dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:src="@drawable/ic_right_arrow"
+                        android:tint="@color/gray5" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@drawable/small_rounded_stroke_gray2"
+                    android:layerType="software" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->actions.contactUs()}"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_contact"
+                        android:tint="@color/gray5" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:singleLine="true"
+                        android:text="@string/contact_us"
+                        android:textColor="@color/gray11"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:padding="3dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:src="@drawable/ic_right_arrow"
+                        android:tint="@color/gray5" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@drawable/small_rounded_stroke_gray2"
+                    android:layerType="software" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -383,7 +425,7 @@
                         android:layout_height="35dp"
                         android:padding="3dp"
                         android:src="@drawable/ic_logout"
-                        android:tint="@color/red"
+                        android:tint="@color/gray5"
                         android:visibility="visible"
                         />
                     <TextView
@@ -396,7 +438,7 @@
                         android:longClickable="false"
                         android:singleLine="true"
                         android:text="@string/logout"
-                        android:textColor="@color/gray11"
+                        android:textColor="@color/red"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>

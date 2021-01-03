@@ -251,7 +251,7 @@ public class Fragment_NearBy extends Fragment implements OnMapReadyCallback, Goo
 
 
                             if (response.body().getCurrent_page() < response.body().getTotal()) {
-                                binding.tvMore.setVisibility(View.VISIBLE);
+                                binding.tvMore.setVisibility(View.GONE);
                             } else {
                                 binding.tvMore.setVisibility(View.GONE);
 

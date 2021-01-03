@@ -166,5 +166,6 @@
     <string name="thanx">شكراً لتواصلك معنا</string>
     <string name="country_code">كود الدولة</string>
     <string name="settings">الأعدادات</string>
+    <string name="signup2">تسجيل</string>
 
 </resources>
