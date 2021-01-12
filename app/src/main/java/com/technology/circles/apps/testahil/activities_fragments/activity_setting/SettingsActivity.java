@@ -29,7 +29,7 @@ import java.util.Locale;
 import io.paperdb.BuildConfig;
 import io.paperdb.Paper;
 
-public class SettingsActivity extends AppCompatActivity implements Listeners.SettingActions {
+public class SettingsActivity extends AppCompatActivity implements Listeners.SettingActions, Listeners.BackListener {
     private ActivitySettingsBinding binding;
     private String lang;
     private Preferences preferences;
@@ -115,5 +115,8 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
     }
 
 
-
+    @Override
+    public void back() {
+        finish();
+    }
 }

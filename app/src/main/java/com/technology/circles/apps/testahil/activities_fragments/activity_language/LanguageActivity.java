@@ -14,11 +14,12 @@ import com.creative.share.apps.testahil.R;
 import com.creative.share.apps.testahil.databinding.ActivityLanguageBinding;
 import com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity;
 
+import com.technology.circles.apps.testahil.interfaces.Listeners;
 import com.technology.circles.apps.testahil.language.LanguageHelper;
 
 import io.paperdb.Paper;
 
-public class LanguageActivity extends AppCompatActivity {
+public class LanguageActivity extends AppCompatActivity implements Listeners.BackListener{
 
     private ActivityLanguageBinding binding;
     private String lang;
@@ -44,7 +45,7 @@ public class LanguageActivity extends AppCompatActivity {
         selectedLang = lang;
 
         binding.setLang(lang);
-        binding.close.setOnClickListener(v -> finish());
+       // binding.close.setOnClickListener(v -> finish());
         if (lang.equals("ar")) {
             binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             binding.imageAr.setVisibility(View.VISIBLE);
@@ -143,5 +144,10 @@ public class LanguageActivity extends AppCompatActivity {
             binding.btnConfirm.setTextColor(ContextCompat.getColor(this, R.color.gray9));
             binding.btnConfirm.setBackgroundResource(R.drawable.small_rounded_gray);
         }
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

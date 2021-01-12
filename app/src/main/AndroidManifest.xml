@@ -55,6 +55,10 @@
             android:name="com.technology.circles.apps.testahil.activities_fragments.activity_home.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="com.technology.circles.apps.testahil.activities_fragments.activity_update_profile.UpdateProfileActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name="com.technology.circles.apps.testahil.activities_fragments.activity_code_verification.CodeVerificationActivity" />
         <activity
             android:name="com.technology.circles.apps.testahil.activities_fragments.activity_sign_up.SignUpActivity"

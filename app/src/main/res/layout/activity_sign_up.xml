@@ -458,20 +458,19 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="1"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="50dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
-                    android:layout_marginTop="8dp"
-
+                    android:layout_marginTop="38dp"
+                    android:visibility="invisible"
                     />
 
                 <TextView
                     android:id="@+id/tvBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/login2"
+                    android:text="@string/have_account"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.technology.circles.apps.testahil.models.UserModel;
+import com.technology.circles.apps.testahil.tags.Tags;
 
 public class Preferences {
 
@@ -44,7 +45,25 @@ public class Preferences {
         editor.putString("user_data",userDataGson);
         editor.apply();
     }
+  /*  public void create_update_userdata(Context context, UserModel userModel) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String user_data = gson.toJson(userModel);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_data", user_data);
+        editor.apply();
+        create_update_session(context, Tags.session_login);
 
+    }*/
+    public void create_update_session(Context context, String session) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("state", session);
+        editor.apply();
+
+
+    }
     public UserModel getUserData(Context context)
     {
         SharedPreferences preferences = context.getSharedPreferences("userPref",Context.MODE_PRIVATE);

@@ -20,6 +20,7 @@ import com.technology.circles.apps.testahil.activities_fragments.activity_langua
 import com.technology.circles.apps.testahil.activities_fragments.activity_make_offer.MakeOfferActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_setting.SettingsActivity;
 import com.technology.circles.apps.testahil.activities_fragments.activity_terms.TermsActivity;
+import com.technology.circles.apps.testahil.activities_fragments.activity_update_profile.UpdateProfileActivity;
 import com.technology.circles.apps.testahil.interfaces.Listeners;
 import com.technology.circles.apps.testahil.models.UserModel;
 import com.technology.circles.apps.testahil.preferences.Preferences;
@@ -79,6 +80,8 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
     @Override
     public void onEditProfile() {
+        Intent intent = new Intent(activity, UpdateProfileActivity.class);
+        startActivity(intent);
 
     }
 

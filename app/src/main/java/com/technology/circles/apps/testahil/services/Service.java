@@ -164,6 +164,15 @@ public interface Service {
     Call<ResponseBody> reSendCode(@Field("user_id") int user_id
     );
 
+
+    @FormUrlEncoded
+    @POST("api/profile/update")
+    Call<UserModel> updateProfile(@Header("Authorization") String token,
+                                  @Field("name") String name,
+                                  @Field("email") String email,
+                                  @Field("phone") String phone
+    );
+
 }
 
 

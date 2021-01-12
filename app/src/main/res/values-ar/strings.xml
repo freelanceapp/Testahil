@@ -151,7 +151,7 @@
     <string name="inv_email_pass">البريد الإلكتروني او كلمة المرور غير صحيحة</string>
     <string name="user_blocked">تم حظر المستخدم</string>
     <string name="ch_cat_type">إختر نوع النشاط</string>
-    <string name="family_offer">عرض عائلي</string>
+    <string name="family_offer">عائلي</string>
     <string name="individual_offer">عرض فرد</string>
     <string name="offer">العرض</string>
     <string name="special_offer">عرض خاص</string>
@@ -167,5 +167,9 @@
     <string name="country_code">كود الدولة</string>
     <string name="settings">الأعدادات</string>
     <string name="signup2">تسجيل</string>
+    <string name="have_account">لدي حساب</string>
+    <string name="language">اللغة</string>
+    <string name="profile2">الملف الشخصى</string>
+    <string name="name">الأسم</string>
 
 </resources>
